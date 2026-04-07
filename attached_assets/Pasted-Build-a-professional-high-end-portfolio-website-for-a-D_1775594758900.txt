@@ -1,0 +1,53 @@
+Build a professional, high-end portfolio website for a "Data Analysis | AI | Automation" professional named Shahad Al-Matrafi.
+
+Design Theme:
+
+Use a clean light background (light mode).
+Use soft shadows and clean typography (Inter or Montserrat).
+follow the colors from the uploaded logo.
+Subtle entrance animations (fade-in/slide-up) for each section. Buttons must have hover effects (scale or glow).
+Implement a refined tech aesthetic!
+
+Structure:
+
+Hero Section: Text: "Turning Complex Data into Intelligent Action." Subtext: "I'm Shahad Al-Matrafi, a Data & AI Professional, specializing in predictive analytics, automation pipelines, and turning raw data into strategic business value."
+
+Action Buttons: "Download CV"  and "Contact Me" (scrolls to contact).
+
+About Me: Professional bio with specific highlighted keywords.
+
+Experience: Vertical timeline or card layout showing: Role, Company, Duration, and Bullet points for achievements.
+
+Projects with Filtering: A grid of projects. Each project has "Tags" (e.g., AI, Data Analysis, Automation) .
+
+Implement a Functional Filter Bar to sort projects by tags.
+add github link
+Detailed Project Pages: Clicking a project opens a dedicated, well-structured sub-page with sections for "Overview", "Tools Used", "Video/Image Gallery", and "Outcome".
+
+Skills (Categorized): Use a grid or icons grouped by: "Artificial Intelligence", "Automation", "Data Analysis", and "Technical Stack".
+
+Certifications: A horizontal auto-scrolling carousel (Marquee) showing certification badges/images.
+
+Contact Form: Use a clean form with fields: Name, Email, Message.
+
+Heading: "Let’s build something impactful!"
+
+Integration: Set up to work with Formspree.
+
+Success State: Show a "Message sent! Thank you for reaching out, I'll get back to you soon" message upon submission.
+
+Footer: Social icons (GitHub, LinkedIn, Email) with hover-links.
+
+Special Feature: Add a "Know More About Me" toggle button at the bottom that reveals a hidden personal section (Bookshelf & Interests).
+
+Notes:
+
+Integration: Connect to Supabase to manage all content. 
+
+Media: Set up the logic to fetch images/videos from Supabase Storage Buckets.
+
+Contact Form: Implement a professional contact form using Formspree for emails, and also store a copy of the messages in a Supabase table.
+
+Configuration: Use Environment Variables (.env) for all Supabase keys (URL/Anon Key) to keep the code secure for GitHub.
+
+Ensure the code is production-ready, modular, and optimized for deployment on Render.
