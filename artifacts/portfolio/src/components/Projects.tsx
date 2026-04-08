@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ProjectData } from "@/hooks/usePortfolioData";
 import { SectionHeading } from "./SectionHeading";
 import { Link } from "wouter";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiGithub } from "react-icons/fi";
 
 const FILTERS = ["All", "AI", "Data Analysis", "Automation"];
 
@@ -80,6 +80,26 @@ export default function Projects({ data }: { data: ProjectData[] }) {
               </motion.div>
             ))}
           </AnimatePresence>
+        </motion.div>
+
+        {/* GitHub Profile CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16 flex justify-center"
+        >
+          <a
+            href="https://github.com/shahadmatrafi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-card text-foreground font-semibold text-sm hover:bg-foreground hover:text-background hover:border-foreground hover:scale-105 hover:shadow-lg transition-all duration-300 group"
+          >
+            <FiGithub size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+            View All Projects on GitHub
+            <FiArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+          </a>
         </motion.div>
       </div>
     </section>
