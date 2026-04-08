@@ -43,9 +43,22 @@ export interface CertificationData {
   badge_url: string;
 }
 
+export interface BookEntry {
+  title: string;
+  notes: string[];
+}
+
+export interface EventEntry {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  photo_url: string;
+}
+
 export interface PersonalInfoData {
-  books: string[];
-  interests: string[];
+  books: BookEntry[];
+  events: EventEntry[];
 }
 
 // Fallback Data
@@ -141,8 +154,48 @@ const FALLBACK_CERTIFICATIONS: CertificationData[] = [
 ];
 
 const FALLBACK_PERSONAL_INFO: PersonalInfoData = {
-  books: ["Thinking, Fast and Slow by Daniel Kahneman", "The Signal and the Noise by Nate Silver", "Weapons of Math Destruction by Nate Silver"],
-  interests: ["Photography", "Specialty Coffee Roasting", "Hiking", "Open Source Contributing"]
+  books: [
+    {
+      title: "Thinking, Fast and Slow by Daniel Kahneman",
+      notes: [
+        "System 1 (fast, automatic) vs System 2 (slow, deliberate) thinking shapes every decision.",
+        "Cognitive biases are predictable and can be mitigated once you're aware of them.",
+        "Anchoring, availability heuristic, and loss aversion directly affect data interpretation."
+      ]
+    },
+    {
+      title: "The Signal and the Noise by Nate Silver",
+      notes: [
+        "Most data is noise — finding the true signal requires discipline and humility.",
+        "Probabilistic thinking beats point predictions almost every time.",
+        "Forecasters fail when they confuse confidence with accuracy."
+      ]
+    },
+    {
+      title: "Weapons of Math Destruction by Cathy O'Neil",
+      notes: [
+        "Opaque algorithms can encode and amplify existing societal biases.",
+        "Scale + opacity + damage = a weapon of math destruction.",
+        "Accountability in AI and data models is an ethical imperative, not a nice-to-have."
+      ]
+    }
+  ],
+  events: [
+    {
+      id: "1",
+      title: "National AI Hackathon 2023",
+      description: "Competed with a team of 4 to build a real-time demand forecasting model in 48 hours. Reached the top 5 finalists.",
+      date: "Nov 2023",
+      photo_url: ""
+    },
+    {
+      id: "2",
+      title: "Data Science Challenge — KAUST",
+      description: "Developed a predictive maintenance solution for industrial equipment using sensor data and anomaly detection algorithms.",
+      date: "Mar 2023",
+      photo_url: ""
+    }
+  ]
 };
 
 export function usePortfolioData() {
