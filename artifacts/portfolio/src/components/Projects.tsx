@@ -7,12 +7,18 @@ import { FiArrowRight, FiGithub } from "react-icons/fi";
 
 const FILTERS = ["All", "AI", "Data Analysis", "Automation"];
 
+const INITIAL_COUNT = 3;
+
 export default function Projects({ data }: { data: ProjectData[] }) {
   const [filter, setFilter] = useState("All");
+  const [expanded, setExpanded] = useState(false);
 
   const filteredProjects = filter === "All" 
     ? data 
     : data.filter(p => p.tags.includes(filter));
+
+  const visibleProjects = expanded ? filteredProjects : filteredProjects.slice(0, INITIAL_COUNT);
+  const hasMore = filteredProjects.length > INITIAL_COUNT;
 
   return (
     <section id="projects" className="py-24 px-6 relative">
@@ -24,7 +30,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
           {FILTERS.map(f => (
             <button
               key={f}
-              onClick={() => setFilter(f)}
+              onClick={() => { setFilter(f); setExpanded(false); }}
               className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                 filter === f 
                   ? "bg-foreground text-background shadow-md scale-105" 
@@ -39,7 +45,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
         {/* Projects Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {filteredProjects.map((project, idx) => (
+            {visibleProjects.map((project, idx) => (
               <motion.div
                 key={project.id}
                 layout
@@ -81,6 +87,36 @@ export default function Projects({ data }: { data: ProjectData[] }) {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* See More / See Less */}
+        {hasMore && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-10 flex justify-center"
+          >
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-border bg-background text-foreground font-medium text-sm hover:bg-muted transition-all duration-300 group"
+            >
+              {expanded ? (
+                <>
+                  Show Less
+                  <motion.span animate={{ rotate: 180 }} className="inline-block">
+                    <FiArrowRight className="-rotate-90" size={14} />
+                  </motion.span>
+                </>
+              ) : (
+                <>
+                  See More Projects ({filteredProjects.length - INITIAL_COUNT} more)
+                  <motion.span animate={{ rotate: 0 }} className="inline-block">
+                    <FiArrowRight className="rotate-90" size={14} />
+                  </motion.span>
+                </>
+              )}
+            </button>
+          </motion.div>
+        )}
 
         {/* GitHub Profile CTA */}
         <motion.div
