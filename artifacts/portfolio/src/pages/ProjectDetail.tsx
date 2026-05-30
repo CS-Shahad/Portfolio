@@ -102,11 +102,22 @@ export default function ProjectDetail() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h2 className="text-2xl font-bold mb-6">Gallery</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <h2 className="text-2xl font-bold mb-6">Photos</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {project.image_gallery.map((img, idx) => (
-                  <div key={idx} className="rounded-xl overflow-hidden border border-border aspect-video">
-                    <img src={img} alt={`${project.title} screenshot ${idx + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <div key={idx} className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="aspect-video w-full overflow-hidden">
+                      <img
+                        src={img.url}
+                        alt={img.description || `${project.title} photo ${idx + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    {img.description && (
+                      <div className="p-4">
+                        <p className="text-sm text-muted-foreground leading-relaxed">{img.description}</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

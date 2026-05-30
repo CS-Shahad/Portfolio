@@ -15,6 +15,11 @@ export interface ExperienceData {
   achievements: string[];
 }
 
+export interface ProjectGalleryImage {
+  url: string;
+  description: string;
+}
+
 export interface ProjectData {
   id: string;
   title: string;
@@ -25,7 +30,7 @@ export interface ProjectData {
   overview: string;
   tools_used: string[];
   video_url?: string;
-  image_gallery: string[];
+  image_gallery: ProjectGalleryImage[];
   outcome: string;
 }
 
@@ -61,10 +66,6 @@ export interface PersonalInfoData {
   events: EventEntry[];
 }
 
-export interface ProjectPhotoEntry {
-  url: string;
-  description: string;
-}
 
 // Fallback Data
 const FALLBACK_ABOUT: AboutData = {
@@ -107,7 +108,10 @@ const FALLBACK_PROJECTS: ProjectData[] = [
     github_url: "https://github.com/",
     overview: "Built an end-to-end predictive model to identify at-risk customers before they cancel their subscriptions.",
     tools_used: ["Python", "scikit-learn", "Pandas", "PostgreSQL", "AWS"],
-    image_gallery: [],
+    image_gallery: [
+      { url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80", description: "Model performance dashboard showing precision-recall curves and feature importance rankings." },
+      { url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80", description: "Data pipeline architecture overview from raw ingestion to CRM integration." }
+    ],
     outcome: "Reduced overall churn by 18% in the first quarter of deployment."
   },
   {
@@ -119,7 +123,9 @@ const FALLBACK_PROJECTS: ProjectData[] = [
     github_url: "https://github.com/",
     overview: "Replaced a manual, error-prone weekly reporting process with a fully automated ETL pipeline.",
     tools_used: ["Apache Airflow", "SQL", "Tableau", "Python"],
-    image_gallery: [],
+    image_gallery: [
+      { url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80", description: "Automated financial reporting interface delivering daily summaries to stakeholders." }
+    ],
     outcome: "Saved the finance team 20+ hours per week and eliminated human data entry errors."
   },
   {
@@ -131,7 +137,9 @@ const FALLBACK_PROJECTS: ProjectData[] = [
     github_url: "https://github.com/",
     overview: "Developed a custom NLP model to categorize textual feedback into actionable product insights.",
     tools_used: ["HuggingFace", "PyTorch", "FastAPI", "React"],
-    image_gallery: [],
+    image_gallery: [
+      { url: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80", description: "Real-time sentiment scoring interface showing customer review analysis results." }
+    ],
     outcome: "Enabled product teams to identify and resolve major bugs 3x faster based on user sentiment spikes."
   }
 ];
@@ -203,21 +211,6 @@ const FALLBACK_PERSONAL_INFO: PersonalInfoData = {
   ]
 };
 
-const FALLBACK_PROJECT_PHOTOS: ProjectPhotoEntry[] = [
-  {
-    url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
-    description: "Data pipeline architecture overview — visualizing the end-to-end flow from raw ingestion to dashboard output."
-  },
-  {
-    url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    description: "Model performance dashboard showing precision-recall curves and feature importance rankings."
-  },
-  {
-    url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-    description: "Automated financial reporting interface delivering daily summaries to stakeholders."
-  }
-];
-
 export function usePortfolioData() {
   const [about, setAbout] = useState<AboutData>(FALLBACK_ABOUT);
   const [experience, setExperience] = useState<ExperienceData[]>(FALLBACK_EXPERIENCE);
@@ -225,7 +218,6 @@ export function usePortfolioData() {
   const [skills, setSkills] = useState<SkillData[]>(FALLBACK_SKILLS);
   const [certifications, setCertifications] = useState<CertificationData[]>(FALLBACK_CERTIFICATIONS);
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>(FALLBACK_PERSONAL_INFO);
-  const [projectPhotos, setProjectPhotos] = useState<ProjectPhotoEntry[]>(FALLBACK_PROJECT_PHOTOS);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -260,5 +252,5 @@ export function usePortfolioData() {
     fetchData();
   }, []);
 
-  return { about, experience, projects, skills, certifications, personalInfo, projectPhotos, loading };
+  return { about, experience, projects, skills, certifications, personalInfo, loading };
 }

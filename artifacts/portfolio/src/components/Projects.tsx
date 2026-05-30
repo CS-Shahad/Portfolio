@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProjectData, ProjectPhotoEntry } from "@/hooks/usePortfolioData";
+import { ProjectData } from "@/hooks/usePortfolioData";
 import { SectionHeading } from "./SectionHeading";
 import { Link } from "wouter";
-import { FiArrowRight, FiGithub, FiImage } from "react-icons/fi";
+import { FiArrowRight, FiGithub } from "react-icons/fi";
 
 const FILTERS = ["All", "AI", "Data Analysis", "Automation"];
 
 const INITIAL_COUNT = 3;
 
-export default function Projects({ data, photos = [] }: { data: ProjectData[]; photos?: ProjectPhotoEntry[] }) {
+export default function Projects({ data }: { data: ProjectData[] }) {
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(false);
 
@@ -115,45 +115,6 @@ export default function Projects({ data, photos = [] }: { data: ProjectData[]; p
                 </>
               )}
             </button>
-          </motion.div>
-        )}
-
-        {/* Photos Section */}
-        {photos.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="mt-24"
-          >
-            <div className="flex items-center gap-3 mb-10 justify-center">
-              <FiImage className="text-primary" size={20} />
-              <h3 className="text-2xl font-bold text-foreground">Project Gallery</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {photos.map((photo, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="aspect-[4/3] w-full overflow-hidden">
-                    <img
-                      src={photo.url}
-                      alt={photo.description}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm text-muted-foreground leading-relaxed">{photo.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
         )}
 
