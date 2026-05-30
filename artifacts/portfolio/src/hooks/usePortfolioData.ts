@@ -61,6 +61,11 @@ export interface PersonalInfoData {
   events: EventEntry[];
 }
 
+export interface ProjectPhotoEntry {
+  url: string;
+  description: string;
+}
+
 // Fallback Data
 const FALLBACK_ABOUT: AboutData = {
   bio: "I am a Data & AI Professional dedicated to translating vast, complex datasets into precise, actionable strategies. With a foundation in statistical analysis and machine learning, I engineer automation pipelines that streamline operations and build predictive models that forecast business trends. My approach bridges the gap between technical rigor and strategic vision, ensuring every data point serves a clear, impactful purpose.",
@@ -198,6 +203,21 @@ const FALLBACK_PERSONAL_INFO: PersonalInfoData = {
   ]
 };
 
+const FALLBACK_PROJECT_PHOTOS: ProjectPhotoEntry[] = [
+  {
+    url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
+    description: "Data pipeline architecture overview — visualizing the end-to-end flow from raw ingestion to dashboard output."
+  },
+  {
+    url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    description: "Model performance dashboard showing precision-recall curves and feature importance rankings."
+  },
+  {
+    url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    description: "Automated financial reporting interface delivering daily summaries to stakeholders."
+  }
+];
+
 export function usePortfolioData() {
   const [about, setAbout] = useState<AboutData>(FALLBACK_ABOUT);
   const [experience, setExperience] = useState<ExperienceData[]>(FALLBACK_EXPERIENCE);
@@ -205,6 +225,7 @@ export function usePortfolioData() {
   const [skills, setSkills] = useState<SkillData[]>(FALLBACK_SKILLS);
   const [certifications, setCertifications] = useState<CertificationData[]>(FALLBACK_CERTIFICATIONS);
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>(FALLBACK_PERSONAL_INFO);
+  const [projectPhotos, setProjectPhotos] = useState<ProjectPhotoEntry[]>(FALLBACK_PROJECT_PHOTOS);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -239,5 +260,5 @@ export function usePortfolioData() {
     fetchData();
   }, []);
 
-  return { about, experience, projects, skills, certifications, personalInfo, loading };
+  return { about, experience, projects, skills, certifications, personalInfo, projectPhotos, loading };
 }

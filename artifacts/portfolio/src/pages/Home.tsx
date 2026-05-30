@@ -11,7 +11,7 @@ import PersonalInfo from "@/components/PersonalInfo";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 export default function Home() {
-  const { about, experience, projects, skills, certifications, personalInfo, loading } = usePortfolioData();
+  const { about, experience, projects, skills, certifications, personalInfo, projectPhotos, loading } = usePortfolioData();
 
   if (loading) {
     return (
@@ -27,7 +27,7 @@ export default function Home() {
       <About data={about} />
       <Experience data={experience} />
       <Education />
-      <Projects data={projects} />
+      <Projects data={projects} photos={projectPhotos} />
       <Skills data={skills} />
       <Certifications data={certifications} />
       <Contact />

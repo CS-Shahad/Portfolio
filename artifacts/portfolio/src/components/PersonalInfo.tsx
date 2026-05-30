@@ -36,7 +36,7 @@ export default function PersonalInfo({ data }: { data: PersonalInfoData }) {
                   <div className="flex items-center gap-3 text-xl font-bold text-foreground">
                     <FiBookOpen className="text-primary" /> Bookshelf
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     {data.books.map((book, idx) => (
                       <div key={idx} className="border border-border rounded-2xl overflow-hidden bg-card">
                         <button
