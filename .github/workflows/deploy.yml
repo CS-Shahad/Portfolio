@@ -3,7 +3,7 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches:
-      - main # أو master حسب اسم الفرع الرئيسي عندك
+      - main
 
 permissions:
   contents: read
@@ -18,7 +18,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps: deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -32,7 +32,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 11 # يتوافق مع نسخة pnpm التي تستخدمينها
+          version: 11
 
       - name: Get pnpm store directory
         shell: bash
@@ -42,7 +42,7 @@ jobs:
       - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
-          path: ${{ env: STORE_PATH }}
+          path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
@@ -51,7 +51,6 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Portfolio Project
-        # هنا نقوم بتمرير المتغيرات التي يحتاجها الـ Vite أثناء البناء والتشغيل
         run: |
           PORT=3000 BASE_PATH=/${{ github.event.repository.name }}/ pnpm --filter @workspace/portfolio run build
 
@@ -61,9 +60,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # تنبيه: تأكدي من مسار مجلد المخرجات (dist) بعد البناء، غالباً يكون في هذا المسار:
-            # path: './artifacts/portfolio/src' >> من عندي، جربيها لو احتجتي 
-            path: './artifacts/portfolio/dist' 
+          path: './artifacts/portfolio/dist' 
 
       - name: Deploy to GitHub Pages
         id: deployment
