@@ -18,7 +18,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment_step.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -63,5 +63,5 @@ jobs:
           path: './artifacts/portfolio/dist' 
 
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: deployment_step
         uses: actions/deploy-pages@v4
