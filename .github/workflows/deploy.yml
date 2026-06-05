@@ -52,7 +52,7 @@ jobs:
 
       - name: Build Portfolio Project
         run: |
-          PORT=3000 BASE_PATH=/${{ github.event.repository.name }}/ pnpm --filter @workspace/portfolio run build
+          ${{ github.event.repository.name }}/ pnpm --filter @workspace/portfolio run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
