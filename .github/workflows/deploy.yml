@@ -27,7 +27,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22  # غيّرنا الرقم من 20 إلى 22 ليتوافق مع pnpm 11
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
