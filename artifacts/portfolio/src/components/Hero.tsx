@@ -3,22 +3,14 @@ import { FiArrowDown, FiDownload, FiMail } from "react-icons/fi";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden px-6 pt-20">
+    <section id="home" className="relative min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden px-6 pt-20">
       {/* Background glow effects */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00C8E0]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#E040FB]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto text-center z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-8 flex justify-center"
-        >
-          <div className="w-24 h-24 rounded-2xl bg-white shadow-xl shadow-primary/5 flex items-center justify-center p-4 border border-white/50 backdrop-blur-sm">
-            <img src="/logo.png" alt="Shahad Al-Matrafi Logo" className="w-full h-full object-contain" />
-          </div>
-        </motion.div>
+        
+        {/* تم حذف حاوية اللوجو من هنا بنجاح */}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
