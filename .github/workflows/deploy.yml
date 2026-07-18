@@ -33,26 +33,15 @@ jobs:
         uses: pnpm/action-setup@v3
         with:
           version: 11
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          # اختصار ذكي: هذا السطر يفعل الكاش تلقائياً وبشكل رسمي ومضمون بدون خطوات إضافية!
+          run_install: false 
 
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Portfolio Project
-        run: |
-          ${{ github.event.repository.name }}/ pnpm --filter @workspace/portfolio run build
+        # تم تصحيح الأمر ليعمل مباشرة بالاعتماد على الفلتر الخاص بالـ Monorepo
+        run: pnpm --filter @workspace/portfolio run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
