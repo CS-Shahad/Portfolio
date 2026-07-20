@@ -7,10 +7,11 @@ import Skills from "@/components/Skills";
 import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import PersonalInfo from "@/components/PersonalInfo";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 export default function Home() {
-  const { about, experience, projects, skills, certifications } = usePortfolioData();
+  const { about, experience, projects, skills, certifications, personalInfo } = usePortfolioData();
 
   return (
     <main className="bg-background text-foreground selection:bg-primary/20 selection:text-primary">
@@ -22,6 +23,7 @@ export default function Home() {
       <Skills data={skills} />
       <Certifications data={certifications} />
       <Contact />
+      <PersonalInfo data={personalInfo} />
       <Footer />
     </main>
   );

@@ -1,4 +1,4 @@
-import { FiLinkedin, FiMail } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,6 +13,9 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-4">
+          <a href="https://github.com/CS-Shahad" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+            <FiGithub size={20} />
+          </a>
           <a href="https://linkedin.com/in/shahad-almatrafi-b5193829b" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
             <FiLinkedin size={20} />
           </a>

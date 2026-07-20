@@ -127,7 +127,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
           className="mt-16 flex justify-center"
         >
           <a
-            href="https://github.com/shahadmatrafi"
+            href="https://github.com/CS-Shahad"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-card text-foreground font-semibold text-sm hover:bg-foreground hover:text-background hover:border-foreground hover:scale-105 hover:shadow-lg transition-all duration-300 group"
