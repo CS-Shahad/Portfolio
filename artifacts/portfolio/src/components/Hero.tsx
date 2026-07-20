@@ -9,8 +9,6 @@ export default function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#E040FB]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto text-center z-10">
-        
-        {/* تم حذف حاوية اللوجو من هنا بنجاح */}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -28,7 +26,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          I'm <strong className="text-foreground font-semibold">Shahad Al-Matrafi</strong>, a Data & AI Professional, specializing in predictive analytics, automation pipelines, and turning raw data into strategic business value.
+          I'm <strong className="text-foreground font-semibold">Shahad Al-Matrafi</strong>, an Analytics Engineer specializing in end-to-end data pipelines, BI reporting with Power BI &amp; DAX, and production ML systems — including agentic AI workflows.
         </motion.p>
 
         <motion.div
@@ -52,7 +50,8 @@ export default function Hero() {
           </a>
           
           <a
-            href="#"
+            href={`${import.meta.env.BASE_URL}Shahad_AlMatrafi_CV.pdf`}
+            download="Shahad_AlMatrafi_CV.pdf"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-foreground rounded-full font-medium border border-border transition-all hover:border-[#7730E8]/30 hover:shadow-lg hover:shadow-[#7730E8]/5 hover:scale-105"
           >
             Download CV <FiDownload className="group-hover:-translate-y-1 transition-transform" />

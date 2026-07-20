@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7730E8"/>
+      <stop offset="55%" stop-color="#00C8E0"/>
+      <stop offset="100%" stop-color="#00E0A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g2)"/>
+  <circle cx="140" cy="130" r="160" fill="#ffffff" opacity="0.08"/>
+  <circle cx="660" cy="480" r="180" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(400,240)" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M 0 -90 L 85 -55 L 85 25 C 85 75 45 105 0 120 C -45 105 -85 75 -85 25 L -85 -55 Z"/>
+    <path d="M -30 5 L -10 30 L 35 -25" stroke-width="9"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff">Fraud Detection</text>
+  <text x="400" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" letter-spacing="2" fill="#ffffff" opacity="0.85">ML PIPELINE + POWER BI · 91% F1</text>
+</svg>
