@@ -66,7 +66,7 @@ export interface PersonalInfoData {
 
 // Edit the values below to update site content.
 const ABOUT: AboutData = {
-  bio: "I'm an Analytics Engineer who builds end-to-end data pipelines, multi-layer data models using the Kimball methodology, and centralized BI reporting for executives. I work across the full data stack — from Python and SQL automation to DAX and Power Query semantic models — and I build production ML pipelines, including a fraud detection model with 91% F1, plus a recommendation engine built from scratch on association rule mining. I care about pipeline-to-insight ownership: not just visualizing data, but engineering the systems that make it useful.",
+  bio: "I'm a Data & Automation Specialist who builds end-to-end data pipelines, multi-layer data models using the Kimball methodology, and centralized BI reporting for executives. I work across the full data stack — from Python and SQL automation to DAX and Power Query semantic models — and I build production ML pipelines, including a fraud detection model with 91% F1, plus a recommendation engine built from scratch on association rule mining. I care about pipeline-to-insight ownership: not just visualizing data, but engineering the systems that make it useful.",
   keywords: ["data pipelines", "Kimball methodology", "BI reporting", "ML pipelines", "association rule mining"]
 };
 
