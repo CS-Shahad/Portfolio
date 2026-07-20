@@ -26,7 +26,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          I'm <strong className="text-foreground font-semibold">Shahad Al-Matrafi</strong>, an Analytics Engineer specializing in end-to-end data pipelines, BI reporting with Power BI &amp; DAX, and production ML systems — including agentic AI workflows.
+          I'm <strong className="text-foreground font-semibold">Shahad Al-Matrafi</strong>, a Data &amp; Automation Specialist specializing in end-to-end data pipelines, BI reporting with Power BI &amp; DAX, and production ML systems — including agentic AI workflows.
         </motion.p>
 
         <motion.div
