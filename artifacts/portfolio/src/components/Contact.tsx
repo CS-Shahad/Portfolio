@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
 import { FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
-import { supabase } from "@/lib/supabase";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -17,22 +16,22 @@ export default function Contact() {
     e.preventDefault();
     setStatus("submitting");
 
-    try {
-      // 1. Submit to Formspree if configured
-      const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
-      if (formspreeEndpoint) {
-        await fetch(formspreeEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
-      }
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+    if (!formspreeEndpoint) {
+      setStatus("error");
+      setErrorMsg("Contact form isn't configured yet. Please email me directly instead.");
+      return;
+    }
 
-      // 2. Save to Supabase (if configured)
-      if (import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_URL !== 'https://placeholder.supabase.co') {
-        await supabase.from("contact_messages").insert([
-          { name: formData.name, email: formData.email, message: formData.message }
-        ]);
+    try {
+      const res = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (!res.ok) {
+        throw new Error(`Formspree responded with ${res.status}`);
       }
 
       setStatus("success");
