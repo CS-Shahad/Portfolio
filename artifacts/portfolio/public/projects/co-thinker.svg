@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C8E0"/>
+      <stop offset="55%" stop-color="#7730E8"/>
+      <stop offset="100%" stop-color="#E040FB"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g1)"/>
+  <circle cx="640" cy="120" r="180" fill="#ffffff" opacity="0.08"/>
+  <circle cx="120" cy="500" r="140" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(400,240)" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <rect x="-90" y="-70" width="180" height="130" rx="18"/>
+    <path d="M -30 60 L -50 100 L -10 62 Z" fill="#ffffff" stroke="none"/>
+    <circle cx="-35" cy="-15" r="10" fill="#ffffff" stroke="none"/>
+    <circle cx="35" cy="-15" r="10" fill="#ffffff" stroke="none"/>
+    <path d="M -35 25 Q 0 45 35 25" stroke-width="8"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff">Co-Thinker</text>
+  <text x="400" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" letter-spacing="2" fill="#ffffff" opacity="0.8">AGENTIC AI TUTORING WORKSPACE</text>
+</svg>

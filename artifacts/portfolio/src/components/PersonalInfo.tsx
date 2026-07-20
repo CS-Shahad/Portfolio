@@ -7,6 +7,10 @@ export default function PersonalInfo({ data }: { data: PersonalInfoData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedBook, setExpandedBook] = useState<number | null>(null);
 
+  if ((!data.books || data.books.length === 0) && (!data.events || data.events.length === 0)) {
+    return null;
+  }
+
   return (
     <section className="py-12 px-6 border-t border-border/50 bg-background">
       <div className="max-w-4xl mx-auto">
@@ -32,6 +36,7 @@ export default function PersonalInfo({ data }: { data: PersonalInfoData }) {
               <div className="pt-12 pb-8 space-y-16">
 
                 {/* Bookshelf */}
+                {data.books && data.books.length > 0 && (
                 <div className="space-y-6">
                   <div className="flex items-center gap-3 text-xl font-bold text-foreground">
                     <FiBookOpen className="text-primary" /> Bookshelf
@@ -82,6 +87,7 @@ export default function PersonalInfo({ data }: { data: PersonalInfoData }) {
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* Events */}
                 {data.events && data.events.length > 0 && (

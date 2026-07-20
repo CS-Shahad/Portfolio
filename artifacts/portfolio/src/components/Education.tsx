@@ -25,10 +25,10 @@ export default function Education() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-foreground">
-                    Bachelor of Science in Computer Science
+                    Bachelor of Computer Science
                   </h3>
                   <p className="text-lg text-primary font-medium mt-1">
-                    University of Ha'il
+                    Umm Al-Qura University
                   </p>
 
                   <div className="flex flex-wrap gap-3 mt-5">
@@ -40,7 +40,7 @@ export default function Education() {
                       style={{ background: "linear-gradient(135deg, rgba(0,200,224,0.12), rgba(231,64,251,0.12))" }}
                     >
                       <span className="text-sm font-semibold" style={{ background: "linear-gradient(90deg, #00C8E0, #7730E8, #E040FB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                        First Honors Class
+                        First Class Honours
                       </span>
                     </div>
                   </div>
@@ -48,7 +48,7 @@ export default function Education() {
               </div>
 
               <div className="px-4 py-1.5 bg-muted text-muted-foreground rounded-full text-sm font-medium whitespace-nowrap self-start shrink-0">
-                2020 – 2024
+                Sep 2019 – Nov 2023
               </div>
             </div>
           </div>

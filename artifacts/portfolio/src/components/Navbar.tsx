@@ -75,7 +75,7 @@ export default function Navbar() {
               Shahad Al-Matrafi
             </p>
             <p className="text-[11px] font-medium text-slate-400 group-hover:text-purple-500 transition-colors">
-              Data & AI Portfolio
+              Analytics Engineer
             </p>
           </div>
         </Link>
