@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-
 // Types
 export interface AboutData {
   bio: string;
@@ -67,13 +64,13 @@ export interface PersonalInfoData {
 }
 
 
-// Fallback Data
-const FALLBACK_ABOUT: AboutData = {
+// Edit the values below to update site content.
+const ABOUT: AboutData = {
   bio: "I am a Data & AI Professional dedicated to translating vast, complex datasets into precise, actionable strategies. With a foundation in statistical analysis and machine learning, I engineer automation pipelines that streamline operations and build predictive models that forecast business trends. My approach bridges the gap between technical rigor and strategic vision, ensuring every data point serves a clear, impactful purpose.",
   keywords: ["predictive analytics", "automation pipelines", "machine learning", "strategic vision", "data engineering"]
 };
 
-const FALLBACK_EXPERIENCE: ExperienceData[] = [
+const EXPERIENCE: ExperienceData[] = [
   {
     id: "1",
     role: "Senior Data Scientist",
@@ -98,7 +95,7 @@ const FALLBACK_EXPERIENCE: ExperienceData[] = [
   }
 ];
 
-const FALLBACK_PROJECTS: ProjectData[] = [
+const PROJECTS: ProjectData[] = [
   {
     id: "1",
     title: "Customer Churn Predictor",
@@ -144,7 +141,7 @@ const FALLBACK_PROJECTS: ProjectData[] = [
   }
 ];
 
-const FALLBACK_SKILLS: SkillData[] = [
+const SKILLS: SkillData[] = [
   { id: "1", name: "Machine Learning", category: "Artificial Intelligence", icon_name: "FiCpu" },
   { id: "2", name: "Deep Learning", category: "Artificial Intelligence", icon_name: "FiLayers" },
   { id: "3", name: "NLP", category: "Artificial Intelligence", icon_name: "FiMessageSquare" },
@@ -159,14 +156,14 @@ const FALLBACK_SKILLS: SkillData[] = [
   { id: "12", name: "AWS", category: "Technical Stack", icon_name: "FiCloud" }
 ];
 
-const FALLBACK_CERTIFICATIONS: CertificationData[] = [
+const CERTIFICATIONS: CertificationData[] = [
   { id: "1", title: "AWS Certified Machine Learning", issuer: "Amazon Web Services", badge_url: "" },
   { id: "2", title: "Data Engineering Professional", issuer: "Google Cloud", badge_url: "" },
   { id: "3", title: "Advanced Deep Learning", issuer: "DeepLearning.AI", badge_url: "" },
   { id: "4", title: "Certified Data Scientist", issuer: "Databricks", badge_url: "" },
 ];
 
-const FALLBACK_PERSONAL_INFO: PersonalInfoData = {
+const PERSONAL_INFO: PersonalInfoData = {
   books: [
     {
       title: "Thinking, Fast and Slow by Daniel Kahneman",
@@ -212,45 +209,12 @@ const FALLBACK_PERSONAL_INFO: PersonalInfoData = {
 };
 
 export function usePortfolioData() {
-  const [about, setAbout] = useState<AboutData>(FALLBACK_ABOUT);
-  const [experience, setExperience] = useState<ExperienceData[]>(FALLBACK_EXPERIENCE);
-  const [projects, setProjects] = useState<ProjectData[]>(FALLBACK_PROJECTS);
-  const [skills, setSkills] = useState<SkillData[]>(FALLBACK_SKILLS);
-  const [certifications, setCertifications] = useState<CertificationData[]>(FALLBACK_CERTIFICATIONS);
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>(FALLBACK_PERSONAL_INFO);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        // Only attempt fetch if URL is somewhat valid (not the placeholder)
-        if (import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_URL !== 'https://placeholder.supabase.co') {
-          const [aboutRes, expRes, projRes, skillsRes, certRes, personalRes] = await Promise.all([
-            supabase.from('about').select('*').limit(1).single(),
-            supabase.from('experiences').select('*').order('id'),
-            supabase.from('projects').select('*').order('id'),
-            supabase.from('skills').select('*').order('id'),
-            supabase.from('certifications').select('*').order('id'),
-            supabase.from('personal_info').select('*').limit(1).single()
-          ]);
-
-          if (aboutRes.data) setAbout(aboutRes.data as AboutData);
-          if (expRes.data && expRes.data.length > 0) setExperience(expRes.data as ExperienceData[]);
-          if (projRes.data && projRes.data.length > 0) setProjects(projRes.data as ProjectData[]);
-          if (skillsRes.data && skillsRes.data.length > 0) setSkills(skillsRes.data as SkillData[]);
-          if (certRes.data && certRes.data.length > 0) setCertifications(certRes.data as CertificationData[]);
-          if (personalRes.data) setPersonalInfo(personalRes.data as PersonalInfoData);
-        }
-      } catch (error) {
-        console.error('Error fetching data from Supabase, using fallbacks:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  return { about, experience, projects, skills, certifications, personalInfo, loading };
+  return {
+    about: ABOUT,
+    experience: EXPERIENCE,
+    projects: PROJECTS,
+    skills: SKILLS,
+    certifications: CERTIFICATIONS,
+    personalInfo: PERSONAL_INFO,
+  };
 }

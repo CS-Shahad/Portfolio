@@ -11,6 +11,11 @@ out-tsc
 # dependencies
 node_modules
 
+# environment variables (contain secrets)
+.env
+.env.local
+!.env.example
+
 # IDEs and editors
 /.idea
 .project
