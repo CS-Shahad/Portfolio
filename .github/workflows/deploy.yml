@@ -42,6 +42,8 @@ jobs:
       - name: Build Portfolio Project
         # تم تصحيح الأمر ليعمل مباشرة بالاعتماد على الفلتر الخاص بالـ Monorepo
         run: pnpm --filter @workspace/portfolio run build
+        env:
+          VITE_FORMSPREE_ENDPOINT: ${{ secrets.VITE_FORMSPREE_ENDPOINT }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
