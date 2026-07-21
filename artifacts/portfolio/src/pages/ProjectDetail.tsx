@@ -137,6 +137,7 @@ export default function ProjectDetail() {
           </div>
 
           {/* Links */}
+          {(project.github_url || project.video_url) && (
           <div className="p-6 bg-card rounded-2xl border border-border shadow-sm flex flex-col gap-4">
             <h3 className="text-lg font-bold mb-2">Links</h3>
             {project.github_url && (
@@ -172,6 +173,7 @@ export default function ProjectDetail() {
               </a>
             )}
           </div>
+          )}
         </motion.div>
       </div>
     </div>
