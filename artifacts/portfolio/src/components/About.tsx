@@ -26,10 +26,10 @@ export default function About({ data }: { data: AboutData }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mt-12 max-w-3xl mx-auto"
+          className="mt-12 max-w-4xl mx-auto"
         >
           <div className="prose prose-lg prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
-            <div className="text-xl md:text-2xl leading-loose text-center">
+            <div className="text-lg md:text-2xl leading-loose text-center">
               {renderBio()}
             </div>
           </div>
