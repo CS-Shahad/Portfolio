@@ -14,7 +14,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6"
         >
           Turning Complex Data into <br className="hidden md:block" />
           <span className="text-brand-gradient">Intelligent Action.</span>
@@ -24,7 +24,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
         >
           I'm <strong className="text-foreground font-semibold">Shahad Al-Matrafi</strong>, a Data &amp; Automation Specialist specializing in end-to-end data pipelines, BI reporting with Power BI &amp; DAX, and production ML systems — including agentic AI workflows.
         </motion.p>

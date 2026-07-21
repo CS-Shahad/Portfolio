@@ -6,7 +6,7 @@ import { FiBriefcase } from "react-icons/fi";
 export default function Experience({ data }: { data: ExperienceData[] }) {
   return (
     <section id="experience" className="py-24 px-6 bg-slate-50">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <SectionHeading title="Experience" />
         
         <div className="mt-16 relative">
@@ -31,10 +31,10 @@ export default function Experience({ data }: { data: ExperienceData[] }) {
                   
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-foreground flex items-center gap-3">
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-3">
                         <FiBriefcase className="text-primary hidden md:inline-block" /> {exp.role}
                       </h3>
-                      <p className="text-lg text-primary font-medium mt-1">{exp.company}</p>
+                      <p className="text-base md:text-lg text-primary font-medium mt-1">{exp.company}</p>
                     </div>
                     <div className="px-4 py-1.5 bg-muted text-muted-foreground rounded-full text-sm font-medium whitespace-nowrap self-start md:self-auto">
                       {exp.duration}

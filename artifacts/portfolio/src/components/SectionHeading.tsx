@@ -16,12 +16,12 @@ export function SectionHeading({ title, subtitle, children }: SectionHeadingProp
       transition={{ duration: 0.6 }}
       className="mb-16 md:mb-24 text-center"
     >
-      <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground inline-block relative">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground inline-block relative">
         {title}
         <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gradient rounded-full" />
       </h2>
       {subtitle && (
-        <p className="mt-8 text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-8 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
           {subtitle}
         </p>
       )}
