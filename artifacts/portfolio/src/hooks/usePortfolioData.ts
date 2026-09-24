@@ -42,7 +42,10 @@ export interface CertificationData {
   id: string;
   title: string;
   issuer: string;
-  badge_url: string;
+  /** Badge image URL (square images look best; shown at 112×112, never cropped). Leave "" for a placeholder icon. */
+  badge_url?: string;
+  /** Link to the verified credential. When set, the card becomes a link that opens in a new tab. */
+  credential_url?: string;
 }
 
 export interface BookEntry {

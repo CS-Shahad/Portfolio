@@ -1,16 +1,21 @@
 import { motion } from "framer-motion";
 import { FiDownload, FiMail } from "react-icons/fi";
+import { scrollToSection } from "@/lib/navigation";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden px-6 pt-20">
-      {/* Background image */}
+    <section id="home" className="relative min-h-[calc(100dvh-4rem)] flex flex-col justify-center items-center overflow-hidden px-6 py-16">
+      {/* Background: animated SVG, or a static copy when the user prefers reduced motion */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat motion-reduce:hidden"
         style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg.svg)` }}
       />
-      {/* Gradient overlay: keeps text readable and blends the bottom into the About section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-[hsl(var(--background))]" />
+      <div
+        className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat motion-reduce:block"
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg-static.svg)` }}
+      />
+      {/* Darken for text contrast; the hero ends on a clean edge (a fade to the light About background reads as gray) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
 
       <div className="max-w-5xl mx-auto text-center z-10">
 
@@ -43,7 +48,7 @@ export default function Hero() {
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              scrollToSection("contact");
             }}
             className="group inline-flex items-center gap-2 px-8 py-4 bg-brand-gradient text-white rounded-full font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#7730E8]/30"
           >

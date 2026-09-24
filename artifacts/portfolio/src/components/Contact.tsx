@@ -44,7 +44,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 relative">
+    <section id="contact" className="py-16 md:py-20 px-6 relative">
       <div className="max-w-4xl mx-auto">
         <SectionHeading title="Let's build something impactful!" subtitle="Currently open for new opportunities and collaborations." />
         
@@ -53,7 +53,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="bg-card p-8 md:p-12 rounded-3xl border border-border shadow-xl relative overflow-hidden"
+          className="bg-card p-6 md:p-10 rounded-3xl border border-border shadow-xl relative overflow-hidden"
         >
           {/* Decorative corner */}
           <div className="absolute -top-32 -right-32 w-64 h-64 bg-brand-gradient rounded-full blur-[100px] opacity-20 pointer-events-none" />
@@ -131,7 +131,7 @@ export default function Contact() {
                 <div className="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">
                   {status === "submitting" ? "Sending..." : "Send Message"} 
-                  {!status && <FiSend className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                  {status !== "submitting" && <FiSend className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
                 </span>
               </button>
             </form>

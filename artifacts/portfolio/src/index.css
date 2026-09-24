@@ -124,22 +124,35 @@
   .border-brand-gradient {
     border-image: linear-gradient(135deg, #00C8E0, #7730E8, #E040FB) 1;
   }
-  
-  /* Hide scrollbar for marquee */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 }
 
-/* Marquee Animation */
+/* Marquee: the track holds 3 identical copies, so moving by one third loops seamlessly */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% / 3)); }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+}
+@media (hover: hover) {
+  .marquee:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+}
+.marquee:focus-within .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Keep section headings clear of the sticky navbar when jumping to them */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
 }

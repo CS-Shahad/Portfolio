@@ -5,42 +5,23 @@ import { SectionHeading } from "./SectionHeading";
 import { Link } from "wouter";
 import { FiArrowRight, FiGithub } from "react-icons/fi";
 
+// Tag filter (All / AI / ...) is hidden while there are only a few projects.
+// To re-enable it, add a filter state, filter `data` by `p.tags.includes(filter)`,
+// and render one button per entry here above the grid.
 const FILTERS = ["All", "AI", "Data Analysis", "Automation"];
 
 const INITIAL_COUNT = 3;
 
 export default function Projects({ data }: { data: ProjectData[] }) {
-  const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(false);
 
-  const filteredProjects = filter === "All" 
-    ? data 
-    : data.filter(p => p.tags.includes(filter));
-
-  const visibleProjects = expanded ? filteredProjects : filteredProjects.slice(0, INITIAL_COUNT);
-  const hasMore = filteredProjects.length > INITIAL_COUNT;
+  const visibleProjects = expanded ? data : data.slice(0, INITIAL_COUNT);
+  const hasMore = data.length > INITIAL_COUNT;
 
   return (
-    <section id="projects" className="py-24 px-6 relative">
+    <section id="projects" className="py-16 md:py-20 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <SectionHeading title="Selected Work" subtitle="A collection of predictive models, automated pipelines, and data-driven solutions." />
-        
-        {/* Filter Bar */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {FILTERS.map(f => (
-            <button
-              key={f}
-              onClick={() => { setFilter(f); setExpanded(false); }}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
-                filter === f 
-                  ? "bg-foreground text-background shadow-md scale-105" 
-                  : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
         
         {/* Projects Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -58,9 +39,13 @@ export default function Projects({ data }: { data: ProjectData[] }) {
                 {/* Thumbnail */}
                 <div className="aspect-[4/3] w-full overflow-hidden relative">
                   <div className="absolute inset-0 bg-foreground/10 group-hover:bg-transparent transition-colors z-10" />
-                  <img 
-                    src={project.thumbnail_url} 
-                    alt={project.title} 
+                  <img
+                    src={project.thumbnail_url}
+                    alt={project.title}
+                    width={800}
+                    height={600}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
@@ -108,7 +93,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
                 </>
               ) : (
                 <>
-                  See More Projects ({filteredProjects.length - INITIAL_COUNT} more)
+                  See More Projects ({data.length - INITIAL_COUNT} more)
                   <motion.span animate={{ rotate: 0 }} className="inline-block">
                     <FiArrowRight className="rotate-90" size={14} />
                   </motion.span>
@@ -124,7 +109,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 flex justify-center"
+          className="mt-10 flex justify-center"
         >
           <a
             href="https://github.com/CS-Shahad"

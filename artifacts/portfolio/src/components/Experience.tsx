@@ -5,11 +5,11 @@ import { FiBriefcase } from "react-icons/fi";
 
 export default function Experience({ data }: { data: ExperienceData[] }) {
   return (
-    <section id="experience" className="py-24 px-6 bg-slate-50">
+    <section id="experience" className="py-16 md:py-20 px-6 bg-slate-50">
       <div className="max-w-5xl mx-auto">
         <SectionHeading title="Experience" />
         
-        <div className="mt-16 relative">
+        <div className="relative">
           {/* Vertical Line */}
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
           
@@ -26,7 +26,7 @@ export default function Experience({ data }: { data: ExperienceData[] }) {
                 {/* Timeline Dot */}
                 <div className="absolute left-[30px] top-1.5 w-3 h-3 bg-primary rounded-full hidden md:block shadow-[0_0_0_6px_var(--color-background)]" />
                 
-                <div className="p-8 bg-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+                <div className="p-6 md:p-8 bg-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-border group-hover:bg-brand-gradient transition-all duration-300" />
                   
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">

@@ -4,7 +4,7 @@ import { FiAward, FiBookOpen } from "react-icons/fi";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 px-6 bg-background">
+    <section id="education" className="py-16 md:py-20 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <SectionHeading title="Education" />
 
@@ -13,7 +13,7 @@ export default function Education() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="mt-16"
+
         >
           <div className="relative p-6 md:p-10 bg-card rounded-2xl border border-border shadow-sm group overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-border group-hover:bg-brand-gradient transition-all duration-300" />

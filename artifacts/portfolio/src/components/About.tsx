@@ -17,7 +17,7 @@ export default function About({ data }: { data: AboutData }) {
   };
 
   return (
-    <section id="about" className="py-24 px-6 relative">
+    <section id="about" className="py-16 md:py-20 px-6 relative">
       <div className="max-w-5xl mx-auto">
         <SectionHeading title="About Me" />
         
@@ -26,15 +26,15 @@ export default function About({ data }: { data: AboutData }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mt-12 max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
           <div className="prose prose-lg prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
-            <div className="text-lg md:text-2xl leading-loose text-center">
+            <div className="text-lg md:text-2xl leading-relaxed md:leading-loose text-center">
               {renderBio()}
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             {data.keywords.map((keyword, idx) => (
               <span key={idx} className="px-4 py-2 bg-background border border-border rounded-full text-sm font-medium shadow-sm hover:border-primary/50 transition-colors">
                 {keyword}

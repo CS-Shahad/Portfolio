@@ -1,48 +1,59 @@
-# Shahad Al-Matrafi Portfolio
+# Shahad Al-Matrafi — Portfolio
 
-A professional portfolio website for a Data Analysis | AI | Automation professional. Built with React + Vite. Content lives directly in the codebase, and the contact form is powered by Formspree.
+Personal portfolio for a Data & Automation Specialist, live at **https://cs-shahad.github.io/Portfolio/**.
+
+Built with React, Vite, Tailwind CSS, Framer Motion and wouter. It is a fully static site deployed to GitHub Pages; the contact form posts to [Formspree](https://formspree.io), so there is no backend.
 
 ---
 
-## Environment Variables
+## Where the content lives
 
-Copy `artifacts/portfolio/.env.example` to `artifacts/portfolio/.env` and fill in:
-
-| Variable | Description |
+| What | File |
 |---|---|
-| `VITE_FORMSPREE_ENDPOINT` | Your Formspree form endpoint (e.g. `https://formspree.io/f/xxxxxxxx`) |
+| Bio, experience, projects, skills, certifications, books & events | `artifacts/portfolio/src/hooks/usePortfolioData.ts` |
+| Education | `artifacts/portfolio/src/components/Education.tsx` |
+| Social / contact links | `artifacts/portfolio/src/components/Footer.tsx` |
+| Page titles, site URL | `artifacts/portfolio/src/lib/site.ts` |
+| CV, logo, images | `artifacts/portfolio/public/` |
 
-In production (Replit), set this as a Replit Secret instead of committing a `.env` file.
+Field notes for `usePortfolioData.ts` (each shape is documented by the TypeScript interfaces at the top of the file):
 
----
+- `projects[].tags` — `"AI"`, `"Data Analysis"`, `"Automation"`.
+- `projects[].thumbnail_url` / `image_gallery[].url` — image URLs. For local files, put them in `public/` and use `` `${import.meta.env.BASE_URL}projects/my-image.png` ``.
+- `skills[].icon_name` — a [Feather icon](https://react-icons.github.io/react-icons/icons/fi/) name. Only the icons listed in `ICONS` in `src/components/Skills.tsx` are bundled; add new ones there.
+- `certifications[].badge_url` (optional) — badge image, shown at 112×112 without cropping.
+- `certifications[].credential_url` (optional) — when set, the card links to the credential.
 
-## Editing Content
-
-All portfolio content (bio, work experience, projects, skills, certifications, books, and events) lives in one place:
-
-`artifacts/portfolio/src/hooks/usePortfolioData.ts`
-
-Edit the `ABOUT`, `EXPERIENCE`, `PROJECTS`, `SKILLS`, `CERTIFICATIONS`, and `PERSONAL_INFO` constants directly to update what's shown on the site. The shape of each constant is documented by the TypeScript interfaces at the top of the file.
-
-**Column/field notes:**
-- `projects[].tags` — accepted values: `"AI"`, `"Data Analysis"`, `"Automation"`
-- `projects[].thumbnail_url` / `image_gallery[].url` — full image URLs (upload images somewhere and link them, e.g. GitHub, an image host, or the `public/` folder for local assets)
-- `skills[].category` — accepted values: `"Artificial Intelligence"`, `"Automation"`, `"Data Analysis"`, `"Technical Stack"`
-- `skills[].icon_name` — an icon name from [react-icons/fi](https://react-icons.github.io/react-icons/icons/fi/) (Feather icons)
-
-The **Education** section (`src/components/Education.tsx`) and social/contact links (`src/components/Footer.tsx`) are hardcoded directly in their components — edit those files to update your school, GitHub, LinkedIn, and email.
+Each project gets its own page at `/Portfolio/projects/<id>`; the build generates a static HTML file per project plus `sitemap.xml`, so new projects are picked up automatically.
 
 ---
 
-## Contact Form
+## Run locally
 
-The contact form submits directly to Formspree — no backend or database required. Messages arrive in the inbox tied to your Formspree account.
-
----
-
-## Local Development
+Requires Node.js 22+ and pnpm 11 (`npm install -g pnpm@11`).
 
 ```bash
 pnpm install
-pnpm --filter @workspace/portfolio run dev
+cp artifacts/portfolio/.env.example artifacts/portfolio/.env   # optional: enables the contact form
+pnpm --filter @workspace/portfolio run dev                      # http://localhost:3000/Portfolio/
 ```
+
+Other commands:
+
+```bash
+pnpm --filter @workspace/portfolio run build    # production build -> artifacts/portfolio/dist/public
+pnpm --filter @workspace/portfolio run serve    # preview the production build
+pnpm run typecheck
+```
+
+---
+
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which installs dependencies (`pnpm install --frozen-lockfile`), builds the portfolio and publishes `artifacts/portfolio/dist/public` to GitHub Pages.
+
+Because CI uses a frozen lockfile, run `pnpm install` and commit `pnpm-lock.yaml` whenever you change dependencies.
+
+### Contact form secret
+
+The form reads `VITE_FORMSPREE_ENDPOINT` at build time. Set it under **Settings → Secrets and variables → Actions** as a repository secret named `VITE_FORMSPREE_ENDPOINT` (e.g. `https://formspree.io/f/xxxxxxxx`). Never commit a real `.env` file — it is git-ignored.
