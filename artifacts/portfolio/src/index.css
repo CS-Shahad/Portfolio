@@ -152,7 +152,8 @@ section[id] {
   html {
     scroll-behavior: auto;
   }
+  /* Keep the marquee moving, but slowly */
   .animate-marquee {
-    animation: none;
+    animation-duration: 180s;
   }
 }

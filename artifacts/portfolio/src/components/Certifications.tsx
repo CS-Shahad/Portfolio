@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { CertificationData } from "@/hooks/usePortfolioData";
 import { FiAward, FiExternalLink, FiPause, FiPlay } from "react-icons/fi";
 
@@ -56,63 +55,50 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
 }
 
 export default function Certifications({ data }: { data: CertificationData[] }) {
-  const reduceMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
 
   return (
     <section id="certifications" className="py-16 md:py-20 overflow-hidden bg-foreground text-background">
       <div className="max-w-7xl mx-auto px-6 mb-10 text-center">
         <h2 className="text-3xl font-bold">Certifications & Credentials</h2>
-        {!reduceMotion && (
-          <div className="mt-3 flex items-center justify-center gap-3 text-sm text-white/75">
-            <span className="hidden pointer-fine:inline">Hover to pause</span>
-            <button
-              type="button"
-              onClick={() => setPaused((p) => !p)}
-              aria-pressed={paused}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/85 hover:bg-white/10 transition-colors"
-            >
-              {paused ? <FiPlay size={12} aria-hidden="true" /> : <FiPause size={12} aria-hidden="true" />}
-              {paused ? "Play" : "Pause"}
-            </button>
-          </div>
-        )}
+        <div className="mt-3 flex items-center justify-center gap-3 text-sm text-white/75">
+          <span className="hidden pointer-fine:inline">Hover to pause</span>
+          <button
+            type="button"
+            onClick={() => setPaused((p) => !p)}
+            aria-pressed={paused}
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/85 hover:bg-white/10 transition-colors"
+          >
+            {paused ? <FiPlay size={12} aria-hidden="true" /> : <FiPause size={12} aria-hidden="true" />}
+            {paused ? "Play" : "Pause"}
+          </button>
+        </div>
       </div>
 
-      {reduceMotion ? (
-        <ul className="max-w-6xl mx-auto px-6 flex flex-wrap justify-center gap-6">
-          {data.map((cert) => (
-            <li key={cert.id} className="flex">
-              <CertCard cert={cert} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div className="marquee relative flex overflow-x-hidden">
-          <div className="absolute top-0 bottom-0 left-0 w-16 md:w-48 bg-gradient-to-r from-foreground to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 right-0 w-16 md:w-48 bg-gradient-to-l from-foreground to-transparent z-10 pointer-events-none" />
+      <div className="marquee relative flex overflow-x-hidden">
+        <div className="absolute top-0 bottom-0 left-0 w-16 md:w-48 bg-gradient-to-r from-foreground to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 md:w-48 bg-gradient-to-l from-foreground to-transparent z-10 pointer-events-none" />
 
-          <div
-            className="flex w-max animate-marquee"
-            style={paused ? { animationPlayState: "paused" } : undefined}
-          >
-            {Array.from({ length: MARQUEE_COPIES }, (_, copy) => (
-              // Only the first copy is exposed to assistive tech; the rest are visual repeats.
-              <ul
-                key={copy}
-                aria-hidden={copy > 0 ? true : undefined}
-                className="flex shrink-0 gap-6 pr-6"
-              >
-                {data.map((cert) => (
-                  <li key={cert.id} className="flex">
-                    <CertCard cert={cert} decorative={copy > 0} />
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
+        <div
+          className="flex w-max animate-marquee"
+          style={paused ? { animationPlayState: "paused" } : undefined}
+        >
+          {Array.from({ length: MARQUEE_COPIES }, (_, copy) => (
+            // Only the first copy is exposed to assistive tech; the rest are visual repeats.
+            <ul
+              key={copy}
+              aria-hidden={copy > 0 ? true : undefined}
+              className="flex shrink-0 gap-6 pr-6"
+            >
+              {data.map((cert) => (
+                <li key={cert.id} className="flex">
+                  <CertCard cert={cert} decorative={copy > 0} />
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
-      )}
+      </div>
     </section>
   );
 }
