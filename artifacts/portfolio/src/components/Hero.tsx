@@ -23,7 +23,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.2em] text-white/70"
+          className="mb-5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-white/70"
         >
           <FiMapPin aria-hidden="true" className="shrink-0" /> Makkah, Saudi Arabia
         </motion.p>
@@ -34,8 +34,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-balance text-white mb-6"
         >
-          I build the data systems behind <br className="hidden md:block" />
-          <span className="text-brand-gradient">better decisions.</span>
+          I build the data systems <br className="hidden lg:block" />
+          behind <span className="text-brand-gradient">better decisions.</span>
         </motion.h1>
 
         <motion.p
