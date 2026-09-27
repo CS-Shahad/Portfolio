@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { FiMenu, FiX } from "react-icons/fi";
 import { scrollToSection } from "@/lib/navigation";
+import { SITE_TAGLINE } from "@/lib/site";
+
+// The full tagline is too long next to the menu button on phones.
+const SHORT_TAGLINE = SITE_TAGLINE.split(" | ")[0];
 
 const navLinks = [
   { label: "Home", id: "home" },
@@ -80,7 +84,8 @@ export default function Navbar() {
               Shahad Al-Matrafi
             </p>
             <p className="text-[11px] font-medium text-slate-600 group-hover:text-purple-700 transition-colors">
-              Data & Automation Specialist
+              <span className="sm:hidden">{SHORT_TAGLINE}</span>
+              <span className="hidden sm:inline">{SITE_TAGLINE}</span>
             </p>
           </div>
         </Link>

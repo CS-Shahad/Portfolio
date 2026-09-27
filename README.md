@@ -1,6 +1,6 @@
 # Shahad Al-Matrafi — Portfolio
 
-Personal portfolio for a Data & Automation Specialist, live at **https://cs-shahad.github.io/Portfolio/**.
+Personal portfolio for a Data Analyst (Machine Learning · Power BI · Python), live at **https://cs-shahad.github.io/Portfolio/**.
 
 Built with React, Vite, Tailwind CSS, Framer Motion and wouter. It is a fully static site deployed to GitHub Pages; the contact form posts to [Formspree](https://formspree.io), so there is no backend.
 

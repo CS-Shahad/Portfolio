@@ -69,8 +69,8 @@ export interface PersonalInfoData {
 
 // Edit the values below to update site content.
 const ABOUT: AboutData = {
-  bio: "I'm a Data & Automation Specialist who builds end-to-end data pipelines, multi-layer data models using the Kimball methodology, and centralized BI reporting for executives. I work across the full data stack — from Python and SQL automation to DAX and Power Query semantic models — and I build production ML pipelines, including a fraud detection model with 91% F1, plus a recommendation engine built from scratch on association rule mining. I care about pipeline-to-insight ownership: not just visualizing data, but engineering the systems that make it useful.",
-  keywords: ["data pipelines", "Kimball methodology", "BI reporting", "ML pipelines", "association rule mining"]
+  bio: "I studied Computer Science at Umm Al-Qura University and graduated with First Class Honours. For my graduation project, I coded a recommendation algorithm from scratch. Today at SSCL, I own analytics across fleet, HR, operations, and budgeting: I replaced manual spreadsheet work with Python pipelines, cut dashboard load time by 29%, and built the reports department heads rely on. I enjoy the full path from messy source data to a report or model someone actually acts on, and I'm now growing deeper into machine learning and data science.",
+  keywords: ["Python pipelines", "cut dashboard load time by 29%", "machine learning"]
 };
 
 const EXPERIENCE: ExperienceData[] = [

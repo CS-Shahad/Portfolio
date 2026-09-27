@@ -241,7 +241,7 @@ export default function ProjectDetail() {
             <div className="pointer-events-none absolute -top-24 -right-24 w-56 h-56 bg-brand-gradient rounded-full blur-[90px] opacity-20" />
             <div className="relative">
               <h2 className="text-xl md:text-2xl font-bold text-foreground">Interested in a project like this?</h2>
-              <p className="mt-2 text-muted-foreground">I'm open to new opportunities and collaborations.</p>
+              <p className="mt-2 text-muted-foreground">I'd love to hear from you.</p>
             </div>
             <Link
               href="/#contact"

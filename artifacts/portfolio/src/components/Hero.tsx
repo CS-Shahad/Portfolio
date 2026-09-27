@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FiDownload, FiMail } from "react-icons/fi";
+import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
 import { scrollToSection } from "@/lib/navigation";
 
 export default function Hero() {
@@ -19,14 +19,23 @@ export default function Hero() {
 
       <div className="max-w-5xl mx-auto text-center z-10">
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.2em] text-white/70"
+        >
+          <FiMapPin aria-hidden="true" className="shrink-0" /> Makkah, Saudi Arabia
+        </motion.p>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-balance text-white mb-6"
         >
-          Turning Complex Data into <br className="hidden md:block" />
-          <span className="text-brand-gradient">Intelligent Action.</span>
+          I build the data systems behind <br className="hidden md:block" />
+          <span className="text-brand-gradient">better decisions.</span>
         </motion.h1>
 
         <motion.p
@@ -35,7 +44,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-base md:text-xl text-white/75 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          I'm <strong className="text-white font-semibold">Shahad Al-Matrafi</strong>, a Data &amp; Automation Specialist specializing in end-to-end data pipelines, BI reporting with Power BI &amp; DAX, and production ML systems — including agentic AI workflows.
+          I'm <strong className="text-white font-semibold">Shahad Al-Matrafi</strong>, a Data Analyst who builds automated Python pipelines, Power BI reporting for leadership, and machine learning models.
         </motion.p>
 
         <motion.div

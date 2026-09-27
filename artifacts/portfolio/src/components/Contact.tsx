@@ -46,7 +46,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-16 md:py-20 px-6 relative">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading title="Let's build something impactful!" subtitle="Currently open for new opportunities and collaborations." />
+        <SectionHeading title="Let's build something impactful!" subtitle="Have a project or question? I'd love to hear from you." />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
