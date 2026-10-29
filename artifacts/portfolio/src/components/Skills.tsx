@@ -33,7 +33,7 @@ export default function Skills({ data }: { data: SkillData[] }) {
   return (
     <section id="skills" className="py-16 md:py-20 px-6 bg-slate-50 relative overflow-hidden">
       {/* Decorative background */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent)]" />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <SectionHeading title="Technical Arsenal" subtitle="The tools and methodologies I use to extract value from data." />

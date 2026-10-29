@@ -143,6 +143,24 @@
   animation-play-state: paused;
 }
 
+/* Certifications: light section with soft brand-colored glows (cyan, purple, magenta).
+   The vertical mask fades the tint out at the top and bottom so it blends into the
+   neighbouring sections without a visible band. */
+.cert-tint {
+  background:
+    radial-gradient(ellipse 55% 70% at 12% 45%, rgb(0 200 224 / 0.10), transparent 70%),
+    radial-gradient(ellipse 50% 65% at 55% 60%, rgb(119 48 232 / 0.10), transparent 70%),
+    radial-gradient(ellipse 50% 70% at 90% 40%, rgb(224 64 251 / 0.10), transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+}
+
+/* Fade marquee cards out at the left/right edges into whatever background is behind them */
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
 /* Keep section headings clear of the sticky navbar when jumping to them */
 section[id] {
   scroll-margin-top: 4rem;
