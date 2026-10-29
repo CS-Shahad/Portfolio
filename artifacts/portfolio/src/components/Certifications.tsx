@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { CertificationData } from "@/hooks/usePortfolioData";
 import { FiAward, FiExternalLink, FiPause, FiPlay } from "react-icons/fi";
 
-// The marquee renders the list this many times so it can loop seamlessly on wide screens.
-const MARQUEE_COPIES = 3;
+// The marquee renders the list this many times and moves by one copy per loop.
+// Each copy must be at least as wide as the screen gap it has to fill: 4 copies of
+// 4 cards (~976px each) keep the track seamless on screens up to ~2900px wide.
+const MARQUEE_COPIES = 4;
 
 function CertCard({ cert, decorative = false }: { cert: CertificationData; decorative?: boolean }) {
   const content = (
     <>
-      <div className="w-28 h-28 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
+      <div
+        className={`w-28 h-28 shrink-0 rounded-xl flex items-center justify-center overflow-hidden ${
+          cert.badge_url ? "bg-white" : "bg-white/10"
+        }`}
+      >
         {cert.badge_url ? (
           <img
             src={cert.badge_url}
@@ -17,7 +23,7 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
             height={112}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-contain p-2"
+            className="w-full h-full object-contain p-3"
           />
         ) : (
           <FiAward size={40} className="text-white/40" aria-hidden="true" />
@@ -26,12 +32,13 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
       <div className="text-center">
         <h3 className="font-bold text-white text-sm leading-tight">{cert.title}</h3>
         <p className="text-white/75 text-xs mt-1">{cert.issuer}</p>
-        {cert.credential_url && (
-          <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-cyan-300">
-            View credential <FiExternalLink size={12} aria-hidden="true" />
-          </span>
-        )}
       </div>
+      {cert.credential_url && (
+        <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-white/70 transition-colors group-hover:text-cyan-300">
+          Verify <FiExternalLink size={11} aria-hidden="true" />
+          <span className="sr-only">(opens in a new tab)</span>
+        </span>
+      )}
     </>
   );
 
@@ -45,7 +52,7 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={decorative ? -1 : undefined}
-        className={`${cardClass} hover:bg-white/10 hover:border-white/25 focus-visible:outline-2 focus-visible:outline-cyan-300`}
+        className={`group ${cardClass} hover:bg-white/10 hover:border-white/25 focus-visible:outline-2 focus-visible:outline-cyan-300`}
       >
         {content}
       </a>
@@ -81,7 +88,10 @@ export default function Certifications({ data }: { data: CertificationData[] }) 
 
         <div
           className="flex w-max animate-marquee"
-          style={paused ? { animationPlayState: "paused" } : undefined}
+          style={{
+            "--marquee-copies": MARQUEE_COPIES,
+            animationPlayState: paused ? "paused" : undefined,
+          } as CSSProperties}
         >
           {Array.from({ length: MARQUEE_COPIES }, (_, copy) => (
             // Only the first copy is exposed to assistive tech; the rest are visual repeats.
