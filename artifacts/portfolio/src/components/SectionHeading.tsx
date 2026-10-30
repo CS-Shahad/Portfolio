@@ -4,10 +4,12 @@ import { ReactNode } from "react";
 interface SectionHeadingProps {
   title: string;
   subtitle?: string;
+  /** Override the subtitle color, e.g. on a tinted background where the default gray is too light. */
+  subtitleClassName?: string;
   children?: ReactNode;
 }
 
-export function SectionHeading({ title, subtitle, children }: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle, subtitleClassName = "text-muted-foreground", children }: SectionHeadingProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,7 +23,7 @@ export function SectionHeading({ title, subtitle, children }: SectionHeadingProp
         <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gradient rounded-full" />
       </h2>
       {subtitle && (
-        <p className="mt-7 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className={`mt-7 text-base md:text-lg max-w-2xl mx-auto ${subtitleClassName}`}>
           {subtitle}
         </p>
       )}
