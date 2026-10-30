@@ -42,6 +42,8 @@ export interface CertificationData {
   id: string;
   title: string;
   issuer: string;
+  /** Shown on its own line under the issuer, e.g. "May 2026". */
+  date?: string;
   /** Badge image URL (square images look best; shown at 112×112, never cropped). Leave "" for a placeholder icon. */
   badge_url?: string;
   /** Link to the verified credential. When set, the card becomes a link that opens in a new tab. */
@@ -154,28 +156,32 @@ const CERTIFICATIONS: CertificationData[] = [
   {
     id: "1",
     title: "Google Data Analytics",
-    issuer: "Google · Coursera · Sep 2024",
+    issuer: "Google · Coursera",
+    date: "Sep 2024",
     badge_url: `${import.meta.env.BASE_URL}certifications/google-data-analytics.webp`,
     credential_url: "https://www.credly.com/badges/1d082f60-991f-4a3d-9d72-859d025e8e0f",
   },
   {
     id: "2",
     title: "Power BI & DAX",
-    issuer: "Microsoft Learn · 13 modules · Sep 2025",
+    issuer: "Microsoft Learn · 13 modules",
+    date: "Sep 2025",
     badge_url: `${import.meta.env.BASE_URL}certifications/microsoft-power-bi.svg`,
     credential_url: "https://learn.microsoft.com/en-us/users/shahadalmatrafi-3421/transcript/dg14gbz54ewlq59",
   },
   {
     id: "3",
     title: "Azure AI Engineer Path",
-    issuer: "Microsoft Learn · 23 modules · May 2026",
+    issuer: "Microsoft Learn · 23 modules",
+    date: "May 2026",
     badge_url: `${import.meta.env.BASE_URL}certifications/microsoft-azure-ai.svg`,
     credential_url: "https://learn.microsoft.com/en-us/users/shahadalmatrafi-3421/transcript/dg14gbz54ewlq59",
   },
   {
     id: "4",
     title: "Machine Learning A-Z",
-    issuer: "Udemy · Aug 2023",
+    issuer: "Udemy",
+    date: "Aug 2023",
     badge_url: `${import.meta.env.BASE_URL}certifications/udemy.webp`,
     credential_url: "https://ude.my/UC-84bc2c07-8c35-4754-816d-f38e410844cd",
   },

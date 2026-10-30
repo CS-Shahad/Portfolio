@@ -28,7 +28,8 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
       )}
       <div className="text-center">
         <h3 className="font-bold text-foreground text-sm leading-tight">{cert.title}</h3>
-        <p className="text-slate-600 text-xs mt-1">{cert.issuer}</p>
+        <p className="text-slate-600 text-xs mt-1 whitespace-nowrap">{cert.issuer}</p>
+        {cert.date && <p className="text-slate-600 text-xs mt-0.5">{cert.date}</p>}
       </div>
       {cert.credential_url && (
         <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-slate-600 transition-colors group-hover:text-primary">
@@ -63,23 +64,12 @@ export default function Certifications({ data }: { data: CertificationData[] }) 
   const [paused, setPaused] = useState(false);
 
   return (
-    <section id="certifications" className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-b from-slate-50 to-background">
+    <section id="certifications" className="relative pt-10 pb-6 md:pt-14 md:pb-6 overflow-hidden bg-gradient-to-b from-slate-50 to-background">
       {/* Soft brand-tinted glows; masked so they fade out before the section edges */}
       <div className="cert-tint pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <div className="relative max-w-6xl mx-auto px-6">
         <SectionHeading title="Certifications & Credentials" />
-        <div className="-mt-4 md:-mt-8 mb-1 flex justify-end">
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            aria-pressed={paused}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm hover:text-foreground hover:border-primary/40 transition-colors"
-          >
-            {paused ? <FiPlay size={12} aria-hidden="true" /> : <FiPause size={12} aria-hidden="true" />}
-            {paused ? "Play" : "Pause"}
-          </button>
-        </div>
       </div>
 
       {/* py-4 leaves room for the card shadows; the mask fades cards out at the left/right edges */}
@@ -106,6 +96,18 @@ export default function Certifications({ data }: { data: CertificationData[] }) 
             </ul>
           ))}
         </div>
+      </div>
+
+      <div className="relative mt-1 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-pressed={paused}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm hover:text-foreground hover:border-primary/40 transition-colors"
+        >
+          {paused ? <FiPlay size={12} aria-hidden="true" /> : <FiPause size={12} aria-hidden="true" />}
+          {paused ? "Play" : "Pause"}
+        </button>
       </div>
     </section>
   );
