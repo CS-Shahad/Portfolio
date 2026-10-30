@@ -155,10 +155,17 @@
   mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
 }
 
-/* Fade marquee cards out at the left/right edges into whatever background is behind them */
+/* Fade marquee cards out at the left/right edges into whatever background is behind them
+   (narrower on phones so the fade doesn't cover card text) */
 .marquee-fade {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+@media (min-width: 40rem) {
+  .marquee-fade {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
 }
 
 /* Keep section headings clear of the sticky navbar when jumping to them */

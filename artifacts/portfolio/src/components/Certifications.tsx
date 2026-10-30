@@ -5,7 +5,7 @@ import { SectionHeading } from "./SectionHeading";
 
 // The marquee renders the list this many times and moves by one copy per loop.
 // Each copy must be at least as wide as the screen gap it has to fill: 4 copies of
-// 4 cards (~976px each) keep the track seamless on screens up to ~2900px wide.
+// 4 cards (~976px each, ~864px on phones) keep the track seamless on screens up to ~2900px wide.
 const MARQUEE_COPIES = 4;
 
 function CertCard({ cert, decorative = false }: { cert: CertificationData; decorative?: boolean }) {
@@ -19,10 +19,10 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
           height={112}
           loading="lazy"
           decoding="async"
-          className="w-28 h-28 shrink-0 object-contain"
+          className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 object-contain"
         />
       ) : (
-        <div className="w-28 h-28 shrink-0 rounded-xl bg-muted flex items-center justify-center">
+        <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl bg-muted flex items-center justify-center">
           <FiAward size={40} className="text-muted-foreground" aria-hidden="true" />
         </div>
       )}
@@ -41,7 +41,7 @@ function CertCard({ cert, decorative = false }: { cert: CertificationData; decor
 
   // Same card style as the project cards: white, subtle border, soft shadow, rounded-3xl.
   const cardClass =
-    "flex flex-col items-center gap-3 w-[220px] shrink-0 py-6 px-5 bg-card rounded-3xl border border-border shadow-sm transition-shadow duration-300";
+    "flex flex-col items-center gap-3 w-[200px] sm:w-[220px] shrink-0 py-5 px-4 sm:py-6 sm:px-5 bg-card rounded-3xl border border-border shadow-sm transition-shadow duration-300";
 
   if (cert.credential_url) {
     return (
@@ -63,17 +63,13 @@ export default function Certifications({ data }: { data: CertificationData[] }) 
   const [paused, setPaused] = useState(false);
 
   return (
-    <section id="certifications" className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-slate-50 to-background">
+    <section id="certifications" className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-b from-slate-50 to-background">
       {/* Soft brand-tinted glows; masked so they fade out before the section edges */}
       <div className="cert-tint pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <SectionHeading
-          title="Certifications & Credentials"
-          subtitle="Training in data analytics, Power BI, and AI. Click any card to verify."
-          subtitleClassName="text-slate-600"
-        />
-        <div className="-mt-6 md:-mt-8 mb-2 flex justify-end">
+        <SectionHeading title="Certifications & Credentials" />
+        <div className="-mt-4 md:-mt-8 mb-1 flex justify-end">
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
@@ -100,7 +96,7 @@ export default function Certifications({ data }: { data: CertificationData[] }) 
             <ul
               key={copy}
               aria-hidden={copy > 0 ? true : undefined}
-              className="flex shrink-0 gap-6 pr-6"
+              className="flex shrink-0 gap-4 pr-4 sm:gap-6 sm:pr-6"
             >
               {data.map((cert) => (
                 <li key={cert.id} className="flex">
