@@ -1,11 +1,94 @@
+import { useRef, useState } from "react";
 import { useParams, Link } from "wouter";
-import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { usePortfolioData, type ProjectGalleryImage } from "@/hooks/usePortfolioData";
 import { motion } from "framer-motion";
-import { FiArrowLeft, FiArrowRight, FiGithub, FiExternalLink, FiMail } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiGithub, FiExternalLink, FiMail, FiMaximize2, FiX } from "react-icons/fi";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
 import { useDocumentTitle } from "@/lib/navigation";
 import { projectPageTitle, projectShortTitle } from "@/lib/site";
+
+// Charts and screenshots: shown whole (object-contain on white), click to open a larger view.
+// Uses a native <dialog>, which handles Esc and keeps focus inside while open.
+function Gallery({ images, projectTitle }: { images: ProjectGalleryImage[]; projectTitle: string }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+  const altFor = (img: ProjectGalleryImage, idx: number) => img.description || `${projectTitle} image ${idx + 1}`;
+
+  const open = (idx: number) => {
+    setActive(idx);
+    dialogRef.current?.showModal();
+  };
+  const close = () => dialogRef.current?.close();
+  const current = active === null ? null : images[active];
+
+  return (
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {images.map((img, idx) => (
+          <figure key={idx} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
+            <button
+              type="button"
+              onClick={() => open(idx)}
+              aria-label={`Enlarge: ${altFor(img, idx)}`}
+              className="group relative block w-full aspect-[16/10] bg-white cursor-zoom-in focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-primary"
+            >
+              <img
+                src={img.url}
+                alt={altFor(img, idx)}
+                width={1280}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-contain p-3"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-foreground/70 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+              >
+                <FiMaximize2 size={14} />
+              </span>
+            </button>
+            {img.description && (
+              <figcaption className="p-4 border-t border-border text-sm text-muted-foreground leading-relaxed">{img.description}</figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+
+      <dialog
+        ref={dialogRef}
+        onClose={() => setActive(null)}
+        // A click on the dialog element itself (not its content) is a click on the backdrop.
+        onClick={(e) => e.target === e.currentTarget && close()}
+        aria-label={current ? altFor(current, active!) : undefined}
+        className="m-auto w-[min(96vw,1100px)] max-h-[92vh] rounded-2xl bg-white p-0 shadow-2xl backdrop:bg-[#0B1530]/80 backdrop:backdrop-blur-sm"
+      >
+        {current && (
+          <figure className="relative px-4 pb-4 pt-14 md:px-6 md:pb-6">
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Close"
+              autoFocus
+              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-muted text-foreground hover:bg-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+            >
+              <FiX size={18} />
+            </button>
+            <img
+              src={current.url}
+              alt={altFor(current, active!)}
+              className="mx-auto block max-h-[74vh] w-auto max-w-full object-contain"
+            />
+            {current.description && (
+              <figcaption className="mt-3 pr-10 text-sm text-muted-foreground">{current.description}</figcaption>
+            )}
+          </figure>
+        )}
+      </dialog>
+    </>
+  );
+}
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -50,12 +133,15 @@ export default function ProjectDetail() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap items-center gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20">
                       {tag}
                     </span>
                   ))}
+                  {project.date && (
+                    <span className="text-xs font-medium text-slate-600">{project.date}</span>
+                  )}
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">{project.title}</h1>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-3xl">{project.description}</p>
@@ -91,7 +177,9 @@ export default function ProjectDetail() {
             >
               <h2 className="text-2xl font-bold mb-4 text-brand-gradient inline-block">Overview</h2>
               <div className="prose prose-slate max-w-none text-muted-foreground text-lg leading-relaxed">
-                <p>{project.overview}</p>
+                {project.overview.split(/\n\s*\n/).map((paragraph, i) => (
+                  <p key={i}>{paragraph.trim()}</p>
+                ))}
               </div>
             </motion.section>
 
@@ -114,29 +202,8 @@ export default function ProjectDetail() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <h2 className="text-2xl font-bold mb-6">Photos</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {project.image_gallery.map((img, idx) => (
-                    <div key={idx} className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300">
-                      <div className="aspect-video w-full overflow-hidden">
-                        <img
-                          src={img.url}
-                          alt={img.description || `${project.title} photo ${idx + 1}`}
-                          width={1280}
-                          height={720}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      {img.description && (
-                        <div className="p-4">
-                          <p className="text-sm text-muted-foreground leading-relaxed">{img.description}</p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                <h2 className="text-2xl font-bold mb-6">Gallery</h2>
+                <Gallery images={project.image_gallery} projectTitle={project.title} />
               </motion.section>
             )}
           </div>

@@ -29,6 +29,8 @@ export interface ProjectData {
   video_url?: string;
   image_gallery: ProjectGalleryImage[];
   outcome: string;
+  /** Optional short timeline shown in the project page header, e.g. "Hackathon Aug 2025 · Rebuilt 2026". */
+  date?: string;
 }
 
 export interface SkillData {
@@ -94,6 +96,31 @@ const EXPERIENCE: ExperienceData[] = [
 
 const PROJECTS: ProjectData[] = [
   {
+    id: "2",
+    title: "Fraud Detection — Machine Learning Pipeline",
+    description: "A machine learning model that catches 99.5% of fraud with zero false alarms across 6.3M simulated transactions. Started at the Amad Fintech Hackathon.",
+    thumbnail_url: `${import.meta.env.BASE_URL}projects/fraud-detection/cover.webp`,
+    tags: ["AI", "Data Analysis"],
+    github_url: "https://github.com/CS-Shahad/Fraud_Detection_Model",
+    date: "Hackathon Aug 2025 · Rebuilt 2026",
+    // Paragraphs are separated by a blank line.
+    overview: `Fraud is rare and hard to spot: in PaySim's 6.3 million simulated mobile-money transactions, only 0.13% are fraud, and the rule already in the data catches just 3 of 1,643 fraud cases in the test set.
+
+I built the first version at the Amad Fintech Hackathon in Riyadh (Jul–Aug 2025, sponsored by Alinma Bank and Tuwaiq Academy) as part of a three-person team. I owned the machine learning model, while my teammates designed the monitoring dashboard and covered the financial and compliance side. Our best model, Random Forest, caught 80% of fraud.
+
+In 2026 I rebuilt the model as a tested Python package: a leak-free 60/20/20 split, evaluation on PR-AUC instead of accuracy, thresholds tuned on validation data, and features engineered from how fraud drains account balances.
+
+Because the results were near-perfect, I checked them. An ablation study showed the engineered features drive the gain, and leakage checks found no leakage. Since the data is simulated, real-world performance would be lower.`,
+    tools_used: ["Python", "Pandas", "Scikit-learn", "XGBoost", "LightGBM", "pytest"],
+    image_gallery: [
+      { url: `${import.meta.env.BASE_URL}projects/fraud-detection/fraud-rate-by-type.webp`, description: "Fraud only occurs in TRANSFER and CASH_OUT transactions." },
+      { url: `${import.meta.env.BASE_URL}projects/fraud-detection/fraud-rate-by-hour.webp`, description: "Fraud peaks between 3:00 and 6:00, when 40–58% of transactions are fraudulent." },
+      { url: `${import.meta.env.BASE_URL}projects/fraud-detection/feature-importance.webp`, description: "What the XGBoost model relies on most." },
+      { url: `${import.meta.env.BASE_URL}projects/fraud-detection/precision-recall-curves.webp`, description: "Precision-recall curves of the four models on the test set." },
+    ],
+    outcome: "XGBoost catches 99.5% of fraud (1,634 of 1,643) with zero false alarms, flagging 99.9% of stolen money on 554,082 unseen test transactions."
+  },
+  {
     id: "1",
     title: "Co-Thinker — Agentic AI Tutoring Workspace",
     description: "A spatial AI tutoring agent built with React and the Gemini 1.5 Pro API that guides students with hints instead of direct answers.",
@@ -104,18 +131,6 @@ const PROJECTS: ProjectData[] = [
     tools_used: ["React", "Gemini 1.5 Pro API", "Agentic Workflows"],
     image_gallery: [],
     outcome: "Delivered a working agentic tutoring prototype that reasons about spatial document context and guides students toward answers instead of just providing them."
-  },
-  {
-    id: "2",
-    title: "Fraud Detection — Python ML Pipeline + Power BI",
-    description: "A fraud detection pipeline benchmarking 4 ML algorithms on imbalanced transaction data, with predictions surfaced in Power BI.",
-    thumbnail_url: `${import.meta.env.BASE_URL}projects/fraud-detection.svg`,
-    tags: ["AI", "Data Analysis"],
-    github_url: "",
-    overview: "Built a full fraud-detection pipeline handling imbalanced transaction data, benchmarking 4 algorithms, and achieving an F1 score of 91% on the best-performing model. Surfaced model predictions and risk scores in a live Power BI dashboard.",
-    tools_used: ["Python", "Scikit-learn", "XGBoost", "Power BI"],
-    image_gallery: [],
-    outcome: "Achieved an F1 score of 91% on the best-performing model, with risk scores surfaced directly to business stakeholders via Power BI."
   },
   {
     id: "3",
