@@ -26,7 +26,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
         {/* Projects Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {visibleProjects.map((project, idx) => (
+            {visibleProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
@@ -34,40 +34,44 @@ export default function Projects({ data }: { data: ProjectData[] }) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className="group relative flex flex-col bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300"
+                className="flex"
               >
-                {/* Thumbnail */}
-                <div className="aspect-[4/3] w-full overflow-hidden relative">
-                  <div className="absolute inset-0 bg-foreground/10 group-hover:bg-transparent transition-colors z-10" />
-                  <img
-                    src={project.thumbnail_url}
-                    alt={project.title}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-background/90 backdrop-blur-sm text-foreground rounded-full text-xs font-medium">
-                        {tag}
-                      </span>
-                    ))}
+                {/* The whole card is one link to the project page */}
+                <Link
+                  href={`/projects/${project.id}`}
+                  className="group relative flex flex-col w-full bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  {/* Thumbnail */}
+                  <div className="aspect-[4/3] w-full overflow-hidden relative">
+                    <div className="absolute inset-0 bg-foreground/10 group-hover:bg-transparent transition-colors z-10" />
+                    <img
+                      src={project.thumbnail_url}
+                      alt=""
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    />
+                    <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 bg-background/90 backdrop-blur-sm text-foreground rounded-full text-xs font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-6 md:p-8 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">{project.description}</p>
-                  
-                  <Link href={`/projects/${project.id}`}>
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-foreground group-hover:text-primary transition-colors cursor-pointer w-fit pb-1 border-b border-transparent group-hover:border-primary">
-                      View Case Study <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">{project.description}</p>
+
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-foreground group-hover:text-primary transition-colors w-fit pb-1 border-b border-transparent group-hover:border-primary">
+                      View Case Study <FiArrowRight aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
                     </span>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>

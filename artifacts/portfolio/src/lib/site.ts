@@ -6,7 +6,7 @@ export const SITE_TAGLINE = "Data Analyst | Machine Learning · Power BI · Pyth
 export const SITE_URL = "https://cs-shahad.github.io/Portfolio/";
 export const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_TAGLINE}`;
 
-/** "Fraud Detection — Python ML Pipeline + Power BI" -> "Fraud Detection" */
+/** "Fraud Detection — Machine Learning Pipeline" -> "Fraud Detection" */
 export function projectShortTitle(title: string): string {
   return title.split(" — ")[0].trim();
 }
