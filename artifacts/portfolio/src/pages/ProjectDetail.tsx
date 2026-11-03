@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useParams, Link } from "wouter";
 import { usePortfolioData, type ProjectGalleryImage } from "@/hooks/usePortfolioData";
 import { motion } from "framer-motion";
-import { FiArrowLeft, FiArrowRight, FiGithub, FiExternalLink, FiMail, FiMaximize2, FiX } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiGithub, FiExternalLink, FiLock, FiMail, FiMaximize2, FiPlayCircle, FiX } from "react-icons/fi";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
 import { useDocumentTitle } from "@/lib/navigation";
@@ -228,7 +228,7 @@ export default function ProjectDetail() {
             </div>
 
             {/* Links */}
-            {(project.github_url || project.video_url) && (
+            {(project.github_url || project.video_url || project.demo_status || project.source_note) && (
             <div className="p-6 bg-card rounded-2xl border border-border shadow-sm flex flex-col gap-4">
               <h3 className="text-lg font-bold mb-2">Links</h3>
               {project.github_url && (
@@ -262,6 +262,33 @@ export default function ProjectDetail() {
                     <div className="text-xs text-muted-foreground">Watch walkthrough</div>
                   </div>
                 </a>
+              )}
+              {/* Placeholder until a real demo link exists; a video_url takes precedence */}
+              {project.demo_status === "coming_soon" && !project.video_url && (
+                <div
+                  role="link"
+                  aria-disabled="true"
+                  className="flex items-center gap-3 p-3 rounded-xl border border-dashed border-border bg-muted/40 cursor-not-allowed select-none"
+                >
+                  <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-muted-foreground opacity-60">
+                    <FiPlayCircle size={20} aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span className="font-medium text-muted-foreground opacity-70">Live demo</span>
+                      <span className="whitespace-nowrap rounded-full border border-border bg-background px-2 py-0.5 text-[11px] font-semibold text-slate-600">
+                        Coming soon
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted-foreground opacity-70">Not available yet</div>
+                  </div>
+                </div>
+              )}
+              {project.source_note && (
+                <p className="flex items-center gap-1.5 text-xs text-slate-600">
+                  <FiLock size={12} aria-hidden="true" className="shrink-0" />
+                  {project.source_note}
+                </p>
               )}
             </div>
             )}
