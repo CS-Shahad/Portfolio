@@ -31,6 +31,12 @@ export interface ProjectData {
   outcome: string;
   /** Optional short timeline shown in the project page header, e.g. "Hackathon Aug 2025 · Rebuilt 2026". */
   date?: string;
+  /** Shows a disabled "Live demo — Coming soon" item in the Links card. Remove it once a real `video_url` exists. */
+  demo_status?: "coming_soon";
+  /** Small note at the bottom of the Links card, e.g. "Source code available on request". */
+  source_note?: string;
+  /** "grid" (default): two images per row, good for charts. "full": one image per row at full width, good for wide app screenshots. */
+  gallery_layout?: "grid" | "full";
 }
 
 export interface SkillData {
@@ -122,15 +128,28 @@ Because the results were near-perfect, I checked them. An ablation study showed 
   },
   {
     id: "1",
-    title: "Co-Thinker — Agentic AI Tutoring Workspace",
-    description: "A spatial AI tutoring agent built with React and the Gemini 1.5 Pro API that guides students with hints instead of direct answers.",
-    thumbnail_url: `${import.meta.env.BASE_URL}projects/co-thinker.svg`,
+    title: "Nouri — Socratic AI Study Companion",
+    description: "An AI study companion that guides students with Socratic hints instead of handing them the answer. Qualified for the Gulf round of the AIREA competition.",
+    thumbnail_url: `${import.meta.env.BASE_URL}projects/nouri/cover.webp`,
     tags: ["AI"],
     github_url: "",
-    overview: "Architected a spatial AI tutoring agent using React and the Gemini 1.5 Pro API, with a custom logic layer linking on-screen annotations to document coordinates for context-aware responses. Designed an agentic workflow with a Socratic tutoring pattern — the agent withholds direct answers and instead generates targeted hints, guiding the student's own reasoning.",
-    tools_used: ["React", "Gemini 1.5 Pro API", "Agentic Workflows"],
-    image_gallery: [],
-    outcome: "Delivered a working agentic tutoring prototype that reasons about spatial document context and guides students toward answers instead of just providing them."
+    date: "AIREA Aug 2026 · In development",
+    demo_status: "coming_soon",
+    source_note: "Source code available on request",
+    gallery_layout: "full",
+    // Paragraphs are separated by a blank line.
+    overview: `Students often use AI as a shortcut: they paste a question and copy the answer without thinking. Nouri flips that. Students upload a PDF or a photo of their homework, select the part they're stuck on, and Nouri, a friendly animated character, guides them with questions and hints until they reach the answer themselves.
+
+Nouri sees the selected part and the student's handwriting in the context of the whole page, using Gemini's vision. Hints are graded, from a small nudge to the full steps, and the complete answer is a last step the student chooses. Nouri can also check a handwritten solution, create a similar exercise for practice, and explain a concept, in Arabic or English, by text or voice.
+
+I built it solo for the AIREA International Competition for AI in Education. It scored 9/10 for innovation and creativity and qualified for the Gulf round, with judges noting that its Socratic design "targets cognitive laziness head-on." I'm now developing it toward a public release.`,
+    tools_used: ["React", "TypeScript", "Node.js", "Express", "Gemini 2.5 Flash", "KaTeX", "Docker"],
+    image_gallery: [
+      { url: `${import.meta.env.BASE_URL}projects/nouri/landing.webp`, description: "Nouri's home page: upload a PDF or a photo and start learning." },
+      { url: `${import.meta.env.BASE_URL}projects/nouri/hints.webp`, description: "Nouri guides a student through an equation with questions, then checks their handwritten answer." },
+      { url: `${import.meta.env.BASE_URL}projects/nouri/explain.webp`, description: "Asking Nouri to explain a whole page in simple steps." },
+    ],
+    outcome: "Qualified for the Gulf round of AIREA (39/50, with 9/10 for innovation), and grew into a working app with graded hints, solution checking, voice input, and full Arabic and English support."
   },
   {
     id: "3",
