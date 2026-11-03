@@ -35,6 +35,8 @@ export interface ProjectData {
   demo_status?: "coming_soon";
   /** Small note at the bottom of the Links card, e.g. "Source code available on request". */
   source_note?: string;
+  /** "grid" (default): two images per row, good for charts. "full": one image per row at full width, good for wide app screenshots. */
+  gallery_layout?: "grid" | "full";
 }
 
 export interface SkillData {
@@ -134,6 +136,7 @@ Because the results were near-perfect, I checked them. An ablation study showed 
     date: "AIREA Aug 2026 · In development",
     demo_status: "coming_soon",
     source_note: "Source code available on request",
+    gallery_layout: "full",
     // Paragraphs are separated by a blank line.
     overview: `Students often use AI as a shortcut: they paste a question and copy the answer without thinking. Nouri flips that. Students upload a PDF or a photo of their homework, select the part they're stuck on, and Nouri, a friendly animated character, guides them with questions and hints until they reach the answer themselves.
 

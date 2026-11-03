@@ -10,7 +10,15 @@ import { projectPageTitle, projectShortTitle } from "@/lib/site";
 
 // Charts and screenshots: shown whole (object-contain on white), click to open a larger view.
 // Uses a native <dialog>, which handles Esc and keeps focus inside while open.
-function Gallery({ images, projectTitle }: { images: ProjectGalleryImage[]; projectTitle: string }) {
+function Gallery({
+  images,
+  projectTitle,
+  layout = "grid",
+}: {
+  images: ProjectGalleryImage[];
+  projectTitle: string;
+  layout?: "grid" | "full";
+}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const altFor = (img: ProjectGalleryImage, idx: number) => img.description || `${projectTitle} image ${idx + 1}`;
@@ -24,7 +32,7 @@ function Gallery({ images, projectTitle }: { images: ProjectGalleryImage[]; proj
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className={layout === "full" ? "grid grid-cols-1 gap-8" : "grid grid-cols-1 sm:grid-cols-2 gap-6"}>
         {images.map((img, idx) => (
           <figure key={idx} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
             <button
@@ -40,7 +48,7 @@ function Gallery({ images, projectTitle }: { images: ProjectGalleryImage[]; proj
                 height={800}
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-contain p-3"
+                className={`h-full w-full object-contain ${layout === "full" ? "" : "p-3"}`}
               />
               <span
                 aria-hidden="true"
@@ -203,7 +211,7 @@ export default function ProjectDetail() {
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <h2 className="text-2xl font-bold mb-6">Gallery</h2>
-                <Gallery images={project.image_gallery} projectTitle={project.title} />
+                <Gallery images={project.image_gallery} projectTitle={project.title} layout={project.gallery_layout} />
               </motion.section>
             )}
           </div>
@@ -273,14 +281,11 @@ export default function ProjectDetail() {
                   <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-muted-foreground opacity-60">
                     <FiPlayCircle size={20} aria-hidden="true" />
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                      <span className="font-medium text-muted-foreground opacity-70">Live demo</span>
-                      <span className="whitespace-nowrap rounded-full border border-border bg-background px-2 py-0.5 text-[11px] font-semibold text-slate-600">
-                        Coming soon
-                      </span>
-                    </div>
-                    <div className="text-xs text-muted-foreground opacity-70">Not available yet</div>
+                  <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+                    <span className="font-medium text-muted-foreground opacity-70">Live demo</span>
+                    <span className="whitespace-nowrap rounded-full border border-border bg-background px-2 py-0.5 text-[11px] font-semibold text-slate-600">
+                      Coming soon
+                    </span>
                   </div>
                 </div>
               )}
