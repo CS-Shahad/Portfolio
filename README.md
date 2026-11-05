@@ -1,6 +1,6 @@
 # Shahad Al-Matrafi — Portfolio
 
-Personal portfolio for a Data Analyst (Machine Learning · Power BI · Python), live at **https://cs-shahad.github.io/Portfolio/**.
+Personal portfolio for a Data Analyst (Machine Learning · Power BI · Python), live at **https://shahadalmatrafi.com/**.
 
 Built with React, Vite, Tailwind CSS, Framer Motion and wouter. It is a fully static site deployed to GitHub Pages; the contact form posts to [Formspree](https://formspree.io), so there is no backend.
 
@@ -24,7 +24,7 @@ Field notes for `usePortfolioData.ts` (each shape is documented by the TypeScrip
 - `certifications[].badge_url` (optional) — badge image, shown at 112×112 without cropping.
 - `certifications[].credential_url` (optional) — when set, the card links to the credential.
 
-Each project gets its own page at `/Portfolio/projects/<id>`; the build generates a static HTML file per project plus `sitemap.xml`, so new projects are picked up automatically.
+Each project gets its own page at `/projects/<id>`; the build generates a static HTML file per project plus `sitemap.xml`, so new projects are picked up automatically.
 
 ---
 
@@ -35,7 +35,7 @@ Requires Node.js 22+ and pnpm 11 (`npm install -g pnpm@11`).
 ```bash
 pnpm install
 cp artifacts/portfolio/.env.example artifacts/portfolio/.env   # optional: enables the contact form
-pnpm --filter @workspace/portfolio run dev                      # http://localhost:3000/Portfolio/
+pnpm --filter @workspace/portfolio run dev                      # http://localhost:3000/
 ```
 
 Other commands:
@@ -51,6 +51,8 @@ pnpm run typecheck
 ## Deployment
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which installs dependencies (`pnpm install --frozen-lockfile`), builds the portfolio and publishes `artifacts/portfolio/dist/public` to GitHub Pages.
+
+The site is served from the custom domain **shahadalmatrafi.com** at the root path (`/`). The domain is set under **Settings → Pages → Custom domain**; because the site is deployed by a GitHub Actions workflow, no `CNAME` file is needed (GitHub ignores it for Actions deployments).
 
 Because CI uses a frozen lockfile, run `pnpm install` and commit `pnpm-lock.yaml` whenever you change dependencies.
 

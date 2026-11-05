@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cs-shahad.github.io/Portfolio/sitemap.xml
+Sitemap: https://shahadalmatrafi.com/sitemap.xml

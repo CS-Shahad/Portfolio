@@ -3,7 +3,7 @@
 
 export const SITE_NAME = "Shahad Al-Matrafi";
 export const SITE_TAGLINE = "Data Analyst | Machine Learning · Power BI · Python";
-export const SITE_URL = "https://cs-shahad.github.io/Portfolio/";
+export const SITE_URL = "https://shahadalmatrafi.com/";
 export const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_TAGLINE}`;
 
 /** "Fraud Detection — Machine Learning Pipeline" -> "Fraud Detection" */
