@@ -16,7 +16,7 @@ export default function Home() {
   const { about, experience, projects, skills, certifications, personalInfo } = usePortfolioData();
   useDocumentTitle();
 
-  // Support links like /Portfolio/#contact (direct loads and navbar clicks from other pages).
+  // Support links like /#contact (direct loads and navbar clicks from other pages).
   useEffect(() => {
     const id = decodeURIComponent(window.location.hash.slice(1));
     if (!id) return;

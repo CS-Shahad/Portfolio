@@ -6,7 +6,7 @@ import path from "node:path";
 import { DEFAULT_TITLE, SITE_URL, projectPageTitle } from "./src/lib/site";
 
 const port = Number(process.env.PORT ?? "3000");
-const basePath = process.env.BASE_PATH ?? "/Portfolio/";
+const basePath = process.env.BASE_PATH ?? "/";
 
 const escapeHtml = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
