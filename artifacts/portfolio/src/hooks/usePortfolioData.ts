@@ -1,4 +1,24 @@
 // Types
+export interface ProfileData {
+  name: string;
+  location: string;
+  /** Hero intro, shown after "I'm <name>, ". */
+  intro: string;
+  /** CV file in public/ (linked from the hero's "Download CV" button). */
+  cv_file: string;
+  github_url: string;
+  linkedin_url: string;
+  email: string;
+}
+
+export interface EducationData {
+  degree: string;
+  school: string;
+  dates: string;
+  gpa: string;
+  honours: string;
+}
+
 export interface AboutData {
   bio: string;
   keywords: string[];
@@ -78,6 +98,24 @@ export interface PersonalInfoData {
 
 
 // Edit the values below to update site content.
+const PROFILE: ProfileData = {
+  name: "Shahad Al-Matrafi",
+  location: "Makkah, Saudi Arabia",
+  intro: "a Data Analyst who builds automated Python pipelines, Power BI reporting for leadership, and machine learning models.",
+  cv_file: "Shahad_AlMatrafi_CV.pdf",
+  github_url: "https://github.com/CS-Shahad",
+  linkedin_url: "https://linkedin.com/in/shahad-almatrafi-b5193829b",
+  email: "shahadalmatrafi5@gmail.com",
+};
+
+const EDUCATION: EducationData = {
+  degree: "Bachelor of Computer Science",
+  school: "Umm Al-Qura University",
+  dates: "Sep 2019 – Nov 2023",
+  gpa: "GPA 3.81 / 4.00",
+  honours: "First Class Honours",
+};
+
 const ABOUT: AboutData = {
   bio: "I studied Computer Science at Umm Al-Qura University and graduated with First Class Honours. For my graduation project, I coded a recommendation algorithm from scratch. Today at SSCL, I own analytics across fleet, HR, operations, and budgeting: I replaced manual spreadsheet work with Python pipelines, cut dashboard load time by 29%, and built the reports department heads rely on. I enjoy the full path from messy source data to a report or model someone actually acts on, and I'm now growing deeper into machine learning and data science.",
   keywords: ["Python pipelines", "cut dashboard load time by 29%", "machine learning"]
@@ -228,6 +266,8 @@ const PERSONAL_INFO: PersonalInfoData = {
 
 export function usePortfolioData() {
   return {
+    profile: PROFILE,
+    education: EDUCATION,
     about: ABOUT,
     experience: EXPERIENCE,
     projects: PROJECTS,

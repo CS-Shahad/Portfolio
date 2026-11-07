@@ -26,6 +26,8 @@ Field notes for `usePortfolioData.ts` (each shape is documented by the TypeScrip
 
 Each project gets its own page at `/projects/<id>`; the build generates a static HTML file per project plus `sitemap.xml`, so new projects are picked up automatically.
 
+The build also **prerenders** every page (home, each project, and `404.html`) to static HTML with the full content, so search engines, AI assistants and other tools that don't run JavaScript can read it; React then hydrates it in the browser (`src/entry-server.tsx`, and the plugin in `vite.config.ts`). It also writes `llms.txt`, a plain-text summary for AI tools, from the same data. Profile details (location, intro, CV file, links) and education live in `usePortfolioData.ts` too.
+
 ---
 
 ## Run locally

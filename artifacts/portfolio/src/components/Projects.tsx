@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProjectData } from "@/hooks/usePortfolioData";
+import { ProjectData, usePortfolioData } from "@/hooks/usePortfolioData";
 import { SectionHeading } from "./SectionHeading";
 import { Link } from "wouter";
 import { FiArrowRight, FiGithub } from "react-icons/fi";
@@ -13,6 +13,7 @@ const FILTERS = ["All", "AI", "Data Analysis", "Automation"];
 const INITIAL_COUNT = 3;
 
 export default function Projects({ data }: { data: ProjectData[] }) {
+  const profileGithub = usePortfolioData().profile.github_url;
   const [expanded, setExpanded] = useState(false);
 
   const visibleProjects = expanded ? data : data.slice(0, INITIAL_COUNT);
@@ -116,7 +117,7 @@ export default function Projects({ data }: { data: ProjectData[] }) {
           className="mt-10 flex justify-center"
         >
           <a
-            href="https://github.com/CS-Shahad"
+            href={profileGithub}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border bg-card text-foreground font-semibold text-sm hover:bg-foreground hover:text-background hover:border-foreground hover:scale-105 hover:shadow-lg transition-all duration-300 group"
