@@ -1,7 +1,80 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
-import { FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import { FiSend, FiCheckCircle, FiAlertCircle, FiCheck, FiCopy, FiLinkedin, FiMail } from "react-icons/fi";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
+
+// Email (copy + mailto) and LinkedIn, shown next to the form
+function DirectContact() {
+  const { profile } = usePortfolioData();
+  const emailRef = useRef<HTMLSpanElement>(null);
+  const resetTimer = useRef<number | undefined>(undefined);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "selected">("idle");
+
+  useEffect(() => () => window.clearTimeout(resetTimer.current), []);
+
+  const copyEmail = async () => {
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard API unavailable");
+      await navigator.clipboard.writeText(profile.email);
+      setCopyState("copied");
+    } catch {
+      // Fallback: select the address so it can be copied with the keyboard
+      const node = emailRef.current;
+      const selection = window.getSelection();
+      if (node && selection) {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      setCopyState("selected");
+    }
+    window.clearTimeout(resetTimer.current);
+    resetTimer.current = window.setTimeout(() => setCopyState("idle"), 2500);
+  };
+
+  const smallButton =
+    "inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground hover:border-primary/50 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+
+  return (
+    <div className="bg-card p-6 rounded-3xl border border-border shadow-sm">
+      <h3 className="text-lg font-bold text-foreground">Reach me directly</h3>
+
+      <p className="mt-5 text-xs font-medium uppercase tracking-wider text-slate-600">Email</p>
+      <span ref={emailRef} className="mt-1 block break-all text-base font-medium text-foreground">
+        {profile.email}
+      </span>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button type="button" onClick={copyEmail} className={smallButton}>
+          {copyState === "copied" ? <FiCheck aria-hidden="true" /> : <FiCopy aria-hidden="true" />}
+          {copyState === "copied" ? "Copied" : "Copy"}
+        </button>
+        <a href={`mailto:${profile.email}`} className={smallButton}>
+          <FiMail aria-hidden="true" /> Send email
+        </a>
+      </div>
+      <p aria-live="polite" className="mt-2 min-h-[1.25rem] text-xs text-slate-600">
+        {copyState === "copied" && "Email address copied to the clipboard."}
+        {copyState === "selected" && "Address selected. Press Ctrl+C (⌘C on Mac) to copy."}
+      </p>
+
+      <div className="mt-4 border-t border-border pt-5">
+        <a
+          href={profile.linkedin_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-foreground px-5 py-3 font-semibold text-background transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+        >
+          <span className="absolute inset-0 bg-brand-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <span className="relative z-10 flex items-center gap-2">
+            <FiLinkedin aria-hidden="true" /> LinkedIn
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -45,9 +118,21 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 md:py-20 px-6 relative">
-      <div className="max-w-4xl mx-auto">
-        <SectionHeading title="Let's build something impactful!" subtitle="Have a project or question? I'd love to hear from you." />
-        
+      <div className="max-w-5xl mx-auto">
+        <SectionHeading title="Let's build something impactful!" subtitle="Whatever brings you here, I'd love to connect." />
+
+        {/* Form + direct contact side by side on large screens; on smaller screens the contact block comes first */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-6 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="lg:order-last"
+        >
+          <DirectContact />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -137,6 +222,7 @@ export default function Contact() {
             </form>
           )}
         </motion.div>
+        </div>
       </div>
     </section>
   );

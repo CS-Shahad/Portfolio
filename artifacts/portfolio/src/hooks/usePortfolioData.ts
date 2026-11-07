@@ -100,7 +100,7 @@ export interface PersonalInfoData {
 // Edit the values below to update site content.
 const PROFILE: ProfileData = {
   name: "Shahad Al-Matrafi",
-  location: "Makkah, Saudi Arabia",
+  location: "Saudi Arabia",
   intro: "a Data Analyst who builds automated Python pipelines, Power BI reporting for leadership, and machine learning models.",
   cv_file: "Shahad_AlMatrafi_CV.pdf",
   github_url: "https://github.com/CS-Shahad",
@@ -128,10 +128,10 @@ const EXPERIENCE: ExperienceData[] = [
     company: "Saudi Services Company Limited (SSCL)",
     duration: "Oct 2024 – Present",
     achievements: [
-      "Own end-to-end analytics for corporate fleet and asset data — designed a multi-source data model with conditional logic and optimized DAX to govern and reconcile vehicle records across disparate registries.",
+      "Own end-to-end analytics across fleet, HR, operations, and budgeting. For fleet data, designed a multi-source data model with conditional logic and optimized DAX to reconcile vehicle records across separate registries.",
       "Built Python/Pandas pipelines to clean and standardize raw data feeds, replacing manual spreadsheet processing and removing recurring data-entry errors.",
       "Reduced Power BI dashboard load time by 29% by restructuring the underlying data model and rewriting DAX, improving responsiveness across all executive-facing reports.",
-      "Designed and deployed 10+ production dashboards across logistics, HR, and operations, replacing ad hoc Excel reporting as the primary reporting layer for department heads.",
+      "Designed and deployed 10+ production dashboards across fleet, HR, and operations, replacing ad hoc Excel reporting as the primary reporting layer for department heads.",
       "Engineered a consolidated \"Consumption\" budget pipeline pulling inputs from 60+ departments into a single automated report, eliminating a manual annual forecasting process.",
       "Supervised 5 on-the-job trainees across two cohorts in data analytics, managing task allocation and code reviews for pipeline development."
     ]
@@ -204,24 +204,29 @@ I built it solo for the AIREA International Competition for AI in Education. It 
 ];
 
 const SKILLS: SkillData[] = [
-  { id: "1", name: "Machine Learning", category: "Artificial Intelligence", icon_name: "FiCpu" },
-  { id: "2", name: "Agentic AI & LLM Integration", category: "Artificial Intelligence", icon_name: "FiMessageSquare" },
-  { id: "3", name: "Recommendation Systems", category: "Artificial Intelligence", icon_name: "FiGitBranch" },
-  { id: "4", name: "Feature Engineering", category: "Artificial Intelligence", icon_name: "FiSettings" },
-  { id: "5", name: "Power Automate", category: "Automation", icon_name: "FiRepeat" },
-  { id: "6", name: "Python/Pandas Pipelines", category: "Automation", icon_name: "FiTerminal" },
-  { id: "7", name: "API Integrations", category: "Automation", icon_name: "FiLink" },
-  { id: "8", name: "Scheduled Refresh Automation", category: "Automation", icon_name: "FiClock" },
-  { id: "9", name: "Data Modeling (Kimball & Star Schema)", category: "Data Analysis", icon_name: "FiLayers" },
-  { id: "10", name: "Executive & Centralized Reporting", category: "Data Analysis", icon_name: "FiTrendingUp" },
-  { id: "11", name: "Metric Definition", category: "Data Analysis", icon_name: "FiActivity" },
-  { id: "12", name: "Python", category: "Technical Stack", icon_name: "FiCode" },
-  { id: "13", name: "SQL", category: "Technical Stack", icon_name: "FiDatabase" },
-  { id: "14", name: "Power BI", category: "Technical Stack", icon_name: "FiBarChart2" },
-  { id: "15", name: "DAX & Power Query (M)", category: "Technical Stack", icon_name: "FiPieChart" },
-  { id: "16", name: "Tableau", category: "Technical Stack", icon_name: "FiMonitor" },
-  { id: "17", name: "Oracle ERP", category: "Technical Stack", icon_name: "FiCloud" },
-  { id: "18", name: "Git & GitHub", category: "Technical Stack", icon_name: "FiGithub" }
+  { id: "1", name: "Machine Learning", category: "Machine Learning & AI", icon_name: "FiCpu" },
+  { id: "2", name: "Feature Engineering", category: "Machine Learning & AI", icon_name: "FiSliders" },
+  { id: "3", name: "scikit-learn", category: "Machine Learning & AI", icon_name: "FiTarget" },
+  { id: "4", name: "XGBoost & LightGBM", category: "Machine Learning & AI", icon_name: "FiGitBranch" },
+  { id: "5", name: "Agentic AI & LLM Integration", category: "Machine Learning & AI", icon_name: "FiMessageSquare" },
+  { id: "6", name: "Recommendation Systems", category: "Machine Learning & AI", icon_name: "FiStar" },
+  { id: "7", name: "Power BI", category: "Data Analysis & BI", icon_name: "FiBarChart2" },
+  { id: "8", name: "DAX & Power Query (M)", category: "Data Analysis & BI", icon_name: "FiFilter" },
+  { id: "9", name: "Data Modeling (Kimball & Star Schema)", category: "Data Analysis & BI", icon_name: "FiShare2" },
+  { id: "10", name: "Executive & Centralized Reporting", category: "Data Analysis & BI", icon_name: "FiFileText" },
+  { id: "11", name: "Metric Definition", category: "Data Analysis & BI", icon_name: "FiActivity" },
+  { id: "12", name: "Tableau", category: "Data Analysis & BI", icon_name: "FiPieChart" },
+  { id: "13", name: "Python/Pandas Pipelines", category: "Automation", icon_name: "FiTerminal" },
+  { id: "14", name: "Power Automate", category: "Automation", icon_name: "FiZap" },
+  { id: "15", name: "API Integrations", category: "Automation", icon_name: "FiLink" },
+  { id: "16", name: "Scheduled Refresh Automation", category: "Automation", icon_name: "FiRefreshCw" },
+  { id: "17", name: "Python", category: "Languages & Tools", icon_name: "FiCode" },
+  { id: "18", name: "SQL", category: "Languages & Tools", icon_name: "FiDatabase" },
+  { id: "19", name: "React & TypeScript", category: "Languages & Tools", icon_name: "FiLayout" },
+  { id: "20", name: "Flask", category: "Languages & Tools", icon_name: "FiServer" },
+  { id: "21", name: "Docker", category: "Languages & Tools", icon_name: "FiPackage" },
+  { id: "22", name: "Oracle ERP", category: "Languages & Tools", icon_name: "FiBriefcase" },
+  { id: "23", name: "Git & GitHub", category: "Languages & Tools", icon_name: "FiGithub" },
 ];
 
 const CERTIFICATIONS: CertificationData[] = [
@@ -232,6 +237,14 @@ const CERTIFICATIONS: CertificationData[] = [
     date: "Sep 2024",
     badge_url: `${import.meta.env.BASE_URL}certifications/google-data-analytics.webp`,
     credential_url: "https://www.credly.com/badges/1d082f60-991f-4a3d-9d72-859d025e8e0f",
+  },
+  {
+    id: "5",
+    title: "Advanced Agentic AI Systems Engineering",
+    issuer: "SDAIA Academy",
+    date: "Oct 2026",
+    badge_url: `${import.meta.env.BASE_URL}certifications/sdaia.webp`,
+    credential_url: "https://athkax.sdaia.gov.sa/certificate-verification?type=Event&id=331&certificate=SA26-00219",
   },
   {
     id: "2",
