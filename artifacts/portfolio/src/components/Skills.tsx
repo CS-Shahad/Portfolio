@@ -3,15 +3,17 @@ import { SkillData } from "@/hooks/usePortfolioData";
 import { SectionHeading } from "./SectionHeading";
 import type { IconType } from "react-icons";
 import {
-  FiActivity, FiBarChart2, FiClock, FiCloud, FiCode, FiCpu, FiDatabase, FiGitBranch, FiGithub,
-  FiLayers, FiLink, FiMessageSquare, FiMonitor, FiPieChart, FiRepeat, FiSettings, FiTerminal, FiTrendingUp,
+  FiActivity, FiBarChart2, FiBriefcase, FiCode, FiCpu, FiDatabase, FiFileText, FiFilter, FiGitBranch, FiGithub,
+  FiLayout, FiLink, FiMessageSquare, FiPackage, FiPieChart, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
+  FiTarget, FiTerminal, FiZap,
 } from "react-icons/fi";
 
 // Only these icons are bundled. To use a new `icon_name` in usePortfolioData.ts,
 // import it from react-icons/fi and add it here.
 const ICONS: Record<string, IconType> = {
-  FiActivity, FiBarChart2, FiClock, FiCloud, FiCode, FiCpu, FiDatabase, FiGitBranch, FiGithub,
-  FiLayers, FiLink, FiMessageSquare, FiMonitor, FiPieChart, FiRepeat, FiSettings, FiTerminal, FiTrendingUp,
+  FiActivity, FiBarChart2, FiBriefcase, FiCode, FiCpu, FiDatabase, FiFileText, FiFilter, FiGitBranch, FiGithub,
+  FiLayout, FiLink, FiMessageSquare, FiPackage, FiPieChart, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
+  FiTarget, FiTerminal, FiZap,
 };
 
 export default function Skills({ data }: { data: SkillData[] }) {
@@ -36,7 +38,7 @@ export default function Skills({ data }: { data: SkillData[] }) {
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent)]" />
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <SectionHeading title="Technical Arsenal" subtitle="The tools and methodologies I use to extract value from data." />
+        <SectionHeading title="Skills" subtitle="The tools and methodologies I use to extract value from data." />
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {Object.entries(groupedSkills).map(([category, skills], idx) => (
@@ -48,7 +50,7 @@ export default function Skills({ data }: { data: SkillData[] }) {
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="bg-card p-6 md:p-7 rounded-3xl border border-border shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="text-xl font-bold mb-5 text-foreground pb-4 border-b border-border">{category}</h3>
+              <h3 className="text-xl font-bold mb-5 text-foreground pb-4 border-b border-border lg:min-h-[calc(3.5rem+1rem+1px)]">{category}</h3>
               <ul className="space-y-4">
                 {skills.map(skill => (
                   <li key={skill.id} className="flex items-center gap-4 group">
