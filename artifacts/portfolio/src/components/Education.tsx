@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
 import { FiAward, FiBookOpen } from "react-icons/fi";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 export default function Education() {
+  const { education } = usePortfolioData();
+
   return (
     <section id="education" className="py-16 md:py-20 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
@@ -25,22 +28,22 @@ export default function Education() {
                 </div>
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-foreground">
-                    Bachelor of Computer Science
+                    {education.degree}
                   </h3>
                   <p className="text-base md:text-lg text-primary font-medium mt-1">
-                    Umm Al-Qura University
+                    {education.school}
                   </p>
 
                   <div className="flex flex-wrap gap-1.5 sm:gap-3 mt-5">
                     <div className="flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 bg-primary/10 rounded-xl">
                       <FiAward className="text-primary shrink-0" size={14} />
-                      <span className="text-xs sm:text-sm font-semibold text-primary whitespace-nowrap">GPA 3.81 / 4.00</span>
+                      <span className="text-xs sm:text-sm font-semibold text-primary whitespace-nowrap">{education.gpa}</span>
                     </div>
                     <div className="flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 rounded-xl"
                       style={{ background: "linear-gradient(135deg, rgba(0,200,224,0.12), rgba(231,64,251,0.12))" }}
                     >
                       <span className="text-xs sm:text-sm font-semibold whitespace-nowrap" style={{ background: "linear-gradient(90deg, #00C8E0, #7730E8, #E040FB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                        First Class Honours
+                        {education.honours}
                       </span>
                     </div>
                   </div>
@@ -48,7 +51,7 @@ export default function Education() {
               </div>
 
               <div className="px-4 py-1.5 bg-muted text-muted-foreground rounded-full text-sm font-medium whitespace-nowrap self-start shrink-0">
-                Sep 2019 – Nov 2023
+                {education.dates}
               </div>
             </div>
           </div>

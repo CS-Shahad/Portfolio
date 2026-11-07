@@ -1,9 +1,11 @@
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 const socialLinkClass =
   "w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors shadow-sm hover:shadow-md";
 
 export default function Footer() {
+  const { profile } = usePortfolioData();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -20,23 +22,24 @@ export default function Footer() {
             decoding="async"
             className="w-8 h-8 object-contain opacity-80"
           />
-          <span className="font-bold text-foreground tracking-tight">Shahad Al-Matrafi</span>
+          <span className="font-bold text-foreground tracking-tight">{profile.name}</span>
         </div>
 
         <div className="flex items-center gap-4">
-          <a href="https://github.com/CS-Shahad" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className={socialLinkClass}>
+          <a href={profile.github_url} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className={socialLinkClass}>
             <FiGithub size={20} aria-hidden="true" />
           </a>
-          <a href="https://linkedin.com/in/shahad-almatrafi-b5193829b" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={socialLinkClass}>
+          <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={socialLinkClass}>
             <FiLinkedin size={20} aria-hidden="true" />
           </a>
-          <a href="mailto:shahadalmatrafi5@gmail.com" aria-label="Email" className={socialLinkClass}>
+          <a href={`mailto:${profile.email}`} aria-label="Email" className={socialLinkClass}>
             <FiMail size={20} aria-hidden="true" />
           </a>
         </div>
 
-        <div className="text-sm text-muted-foreground">
-          © {currentYear} Shahad Al-Matrafi. All rights reserved.
+        {/* The prerendered HTML has the build year; the visitor's clock may be a year later */}
+        <div className="text-sm text-muted-foreground" suppressHydrationWarning>
+          {`© ${currentYear} ${profile.name}. All rights reserved.`}
         </div>
       </div>
     </footer>

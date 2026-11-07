@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
 import { scrollToSection } from "@/lib/navigation";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 export default function Hero() {
+  const { profile } = usePortfolioData();
+
   return (
     <section id="home" className="relative min-h-[calc(100dvh-4rem)] flex flex-col justify-center items-center overflow-hidden px-6 py-16">
       {/* Background: animated SVG, or a static copy when the user prefers reduced motion */}
@@ -25,7 +28,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="mb-5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-white/70"
         >
-          <FiMapPin aria-hidden="true" className="shrink-0" /> Makkah, Saudi Arabia
+          <FiMapPin aria-hidden="true" className="shrink-0" /> {profile.location}
         </motion.p>
 
         <motion.h1
@@ -44,7 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-base md:text-xl text-white/75 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          I'm <strong className="text-white font-semibold">Shahad Al-Matrafi</strong>, a Data Analyst who builds automated Python pipelines, Power BI reporting for leadership, and machine learning models.
+          I'm <strong className="text-white font-semibold">{profile.name}</strong>, {profile.intro}
         </motion.p>
 
         <motion.div
@@ -65,8 +68,8 @@ export default function Hero() {
           </a>
 
           <a
-            href={`${import.meta.env.BASE_URL}Shahad_AlMatrafi_CV.pdf`}
-            download="Shahad_AlMatrafi_CV.pdf"
+            href={`${import.meta.env.BASE_URL}${profile.cv_file}`}
+            download={profile.cv_file}
             className="group inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-full font-medium border border-white/25 transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105"
           >
             Download CV <FiDownload className="group-hover:-translate-y-1 transition-transform" />

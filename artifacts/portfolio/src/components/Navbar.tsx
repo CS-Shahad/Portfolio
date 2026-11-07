@@ -21,8 +21,9 @@ const BASE = import.meta.env.BASE_URL;
 export default function Navbar() {
   const [location, navigate] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>("home");
   const isHome = location === "/";
+  // Start from the route so the prerendered HTML and the first client render agree
+  const [activeSection, setActiveSection] = useState<string | null>(isHome ? "home" : null);
 
   // Highlight the section currently crossing the middle of the viewport (home page only).
   useEffect(() => {

@@ -31,10 +31,11 @@ function Router() {
   );
 }
 
-function App() {
+// `ssrPath` is only passed by the build-time prerender (src/entry-server.tsx).
+function App({ ssrPath }: { ssrPath?: string }) {
   return (
     <MotionConfig reducedMotion="user">
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
         <ScrollToTop />
         <Navbar />
         <Router />
