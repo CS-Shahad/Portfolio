@@ -4,7 +4,7 @@ import { SectionHeading } from "./SectionHeading";
 import type { IconType } from "react-icons";
 import {
   FiActivity, FiBarChart2, FiBriefcase, FiCode, FiCpu, FiDatabase, FiFileText, FiFilter, FiGitBranch, FiGithub,
-  FiLayout, FiLink, FiMessageSquare, FiPackage, FiPieChart, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
+  FiLink, FiMessageSquare, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
   FiTarget, FiTerminal, FiZap,
 } from "react-icons/fi";
 
@@ -12,7 +12,7 @@ import {
 // import it from react-icons/fi and add it here.
 const ICONS: Record<string, IconType> = {
   FiActivity, FiBarChart2, FiBriefcase, FiCode, FiCpu, FiDatabase, FiFileText, FiFilter, FiGitBranch, FiGithub,
-  FiLayout, FiLink, FiMessageSquare, FiPackage, FiPieChart, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
+  FiLink, FiMessageSquare, FiRefreshCw, FiServer, FiShare2, FiSliders, FiStar,
   FiTarget, FiTerminal, FiZap,
 };
 
