@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
-import { FiSend, FiCheckCircle, FiAlertCircle, FiCheck, FiCopy, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiSend, FiCheckCircle, FiAlertCircle, FiCheck, FiCopy, FiLinkedin } from "react-icons/fi";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
-// Email (copy + mailto) and LinkedIn, shown next to the form
+// Secondary contact options beside the Send Message button: email (mailto + copy) and LinkedIn
 function DirectContact() {
   const { profile } = usePortfolioData();
-  const emailRef = useRef<HTMLSpanElement>(null);
+  const emailRef = useRef<HTMLAnchorElement>(null);
   const resetTimer = useRef<number | undefined>(undefined);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "selected">("idle");
 
@@ -31,47 +31,52 @@ function DirectContact() {
       setCopyState("selected");
     }
     window.clearTimeout(resetTimer.current);
-    resetTimer.current = window.setTimeout(() => setCopyState("idle"), 2500);
+    resetTimer.current = window.setTimeout(() => setCopyState("idle"), 2000);
   };
 
-  const smallButton =
-    "inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground hover:border-primary/50 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+  const iconButton =
+    "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-muted hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+  const tooltip = copyState === "copied" ? "Copied" : copyState === "selected" ? "Press Ctrl+C to copy" : "Copy email";
 
   return (
-    <div className="bg-card p-6 rounded-3xl border border-border shadow-sm">
-      <h3 className="text-lg font-bold text-foreground">Reach me directly</h3>
-
-      <p className="mt-5 text-xs font-medium uppercase tracking-wider text-slate-600">Email</p>
-      <span ref={emailRef} className="mt-1 block break-all text-base font-medium text-foreground">
+    <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-1.5 gap-y-1 text-sm min-w-0">
+      <span className="text-slate-500">or</span>
+      <a
+        ref={emailRef}
+        href={`mailto:${profile.email}`}
+        className="min-w-0 break-all md:break-normal md:whitespace-nowrap font-medium text-slate-700 underline-offset-4 hover:text-primary hover:underline"
+      >
         {profile.email}
-      </span>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <button type="button" onClick={copyEmail} className={smallButton}>
-          {copyState === "copied" ? <FiCheck aria-hidden="true" /> : <FiCopy aria-hidden="true" />}
-          {copyState === "copied" ? "Copied" : "Copy"}
-        </button>
-        <a href={`mailto:${profile.email}`} className={smallButton}>
-          <FiMail aria-hidden="true" /> Send email
-        </a>
-      </div>
-      <p aria-live="polite" className="mt-2 min-h-[1.25rem] text-xs text-slate-600">
-        {copyState === "copied" && "Email address copied to the clipboard."}
-        {copyState === "selected" && "Address selected. Press Ctrl+C (⌘C on Mac) to copy."}
-      </p>
-
-      <div className="mt-4 border-t border-border pt-5">
+      </a>
+      <span className="inline-flex items-center">
+        <span className="group/copy relative inline-flex">
+          <button type="button" onClick={copyEmail} aria-label="Copy email" className={iconButton}>
+            {copyState === "copied" ? <FiCheck size={16} aria-hidden="true" /> : <FiCopy size={16} aria-hidden="true" />}
+          </button>
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background shadow transition-opacity ${
+              copyState === "idle" ? "opacity-0 group-hover/copy:opacity-100 group-focus-within/copy:opacity-100" : "opacity-100"
+            }`}
+          >
+            {tooltip}
+          </span>
+        </span>
         <a
           href={profile.linkedin_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-foreground px-5 py-3 font-semibold text-background transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+          aria-label="LinkedIn"
+          title="LinkedIn"
+          className={iconButton}
         >
-          <span className="absolute inset-0 bg-brand-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          <span className="relative z-10 flex items-center gap-2">
-            <FiLinkedin aria-hidden="true" /> LinkedIn
-          </span>
+          <FiLinkedin size={16} aria-hidden="true" />
         </a>
-      </div>
+      </span>
+      <span aria-live="polite" className="sr-only">
+        {copyState === "copied" && "Email address copied to the clipboard."}
+        {copyState === "selected" && "Email address selected. Press Ctrl+C, or Command+C on Mac, to copy."}
+      </span>
     </div>
   );
 }
@@ -118,20 +123,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 md:py-20 px-6 relative">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <SectionHeading title="Let's build something impactful!" subtitle="Whatever brings you here, I'd love to connect." />
-
-        {/* Form + direct contact side by side on large screens; on smaller screens the contact block comes first */}
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-6 items-start">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:order-last"
-        >
-          <DirectContact />
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -208,21 +201,23 @@ export default function Contact() {
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="group relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-foreground text-background rounded-xl font-bold transition-all hover:scale-[1.02] overflow-hidden disabled:opacity-70 disabled:hover:scale-100"
-              >
-                <div className="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative z-10 flex items-center gap-2">
-                  {status === "submitting" ? "Sending..." : "Send Message"} 
-                  {status !== "submitting" && <FiSend className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-                </span>
-              </button>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="group relative w-full md:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-10 py-4 bg-foreground text-background rounded-xl font-bold transition-all hover:scale-[1.02] overflow-hidden disabled:opacity-70 disabled:hover:scale-100"
+                >
+                  <div className="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    {status === "submitting" ? "Sending..." : "Send Message"} 
+                    {status !== "submitting" && <FiSend className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                  </span>
+                </button>
+                <DirectContact />
+              </div>
             </form>
           )}
         </motion.div>
-        </div>
       </div>
     </section>
   );
